@@ -41,8 +41,8 @@
   var usandoVideo = false;
   if (vid) {
     vid.addEventListener('playing', function () { usandoVideo = true; vid.classList.add('ok'); if (cv) cv.style.display = 'none'; if (leg) leg.style.display = 'none'; });
-    var src = vid.querySelector('source');
-    if (src) src.addEventListener('error', function () { vid.remove(); vid = null; });
+    var srcs = vid.querySelectorAll('source'), last = srcs[srcs.length - 1];   // só desiste se TODOS os formatos falharem
+    if (last) last.addEventListener('error', function () { if (vid) { vid.remove(); vid = null; } });
   }
 
   /* ---- legenda com o nome das cenas (como na vitrine do programa) ---- */
