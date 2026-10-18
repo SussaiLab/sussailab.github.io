@@ -10,5 +10,9 @@ h1{font-size:30px;margin:6px 0 10px}
 h2{font-size:21px;color:#79c0ff;margin:28px 0 8px}
 .card{background:#161d25;border:1px solid #30363d;border-radius:12px;padding:20px 24px;margin:18px 0}
 .muted{color:#8b949e;font-size:14px}
+.planos{width:100%;border-collapse:collapse;margin:10px 0}
+.planos th,.planos td{padding:8px 10px;border-bottom:1px solid #30363d;text-align:left}
+.planos th{color:#8b949e;font-weight:600}
+.planos td:last-child{font-weight:700;color:#56d364;white-space:nowrap}
 footer{border-top:1px solid #30363d;color:#8b949e;font-size:14px;text-align:center;padding:18px}
 .btn{display:inline-block;background:#238636;color:#fff;border-radius:8px;padding:10px 20px;text-decoration:none;font-weight:600}
