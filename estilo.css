@@ -1,0 +1,14 @@
+*{box-sizing:border-box}
+body{margin:0;background:#0d1117;color:#e6edf3;font:16px/1.55 "Segoe UI",system-ui,sans-serif}
+a{color:#79c0ff}
+header{background:#161d25;border-bottom:1px solid #30363d;padding:14px 24px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.logo{font:800 28px/1 "Segoe UI",sans-serif;letter-spacing:6px;color:#ff7a5c;text-decoration:none}
+header nav{margin-left:auto;display:flex;gap:18px}
+header nav a{color:#c9d1d9;text-decoration:none}
+main{max-width:860px;margin:0 auto;padding:28px 24px 60px}
+h1{font-size:30px;margin:6px 0 10px}
+h2{font-size:21px;color:#79c0ff;margin:28px 0 8px}
+.card{background:#161d25;border:1px solid #30363d;border-radius:12px;padding:20px 24px;margin:18px 0}
+.muted{color:#8b949e;font-size:14px}
+footer{border-top:1px solid #30363d;color:#8b949e;font-size:14px;text-align:center;padding:18px}
+.btn{display:inline-block;background:#238636;color:#fff;border-radius:8px;padding:10px 20px;text-decoration:none;font-weight:600}

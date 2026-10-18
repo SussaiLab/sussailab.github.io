@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Entrar – SUSSAI</title>
+<link rel="stylesheet" href="estilo.css">
+<style>
+  body{display:flex;min-height:100vh;align-items:center;justify-content:center}
+  .box{background:#161d25;border:1px solid #30363d;border-radius:14px;padding:26px 28px;width:min(440px,94vw);text-align:center}
+  #botao{display:flex;justify-content:center;margin:18px 0 10px;min-height:44px}
+  #status{min-height:24px;font-weight:600}
+  .ok{color:#56d364}.erro{color:#ff7b72}
+</style>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+<div class="box">
+  <div class="logo" style="display:block">SUSSAI</div>
+  <p class="muted" style="margin:6px 0 14px">Simulador de CLP 3D</p>
+  <h1 style="font-size:20px;margin:0 0 6px">Entrar com a sua conta Google</h1>
+  <p class="muted">A licença do SUSSAI fica vinculada a este e-mail.</p>
+  <div id="botao"></div>
+  <div id="status"></div>
+  <p class="muted" style="margin-top:16px">Recebemos apenas o seu nome e e-mail. Veja a
+    <a href="privacidade.html" target="_blank">política de privacidade</a> e os <a href="termos.html" target="_blank">termos de uso</a>.</p>
+</div>
+<script src="login.js"></script>
+</body>
+</html>
