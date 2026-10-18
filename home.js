@@ -197,6 +197,48 @@ var SUSSAI_CENAS = [
     im.removeAttribute('src'); im.classList.add('semfoto');
   }, true);
 
+
+  /* ---------- estatísticas ANÔNIMAS (só o dono vê, na planilha e no e-mail) ----------
+     Manda só: evento, plano clicado, um número aleatório do navegador, de onde veio
+     (ex.: linkedin.com) e se é celular. Sem nome, e-mail ou IP.
+     O dono não entra na conta: abra uma vez o site com  #dono  no fim do endereço. */
+  var STAT_URL = 'https://script.google.com/macros/s/AKfycbzUmiNAeX4wbS7guwxjm8zCPOKOhLBbbenZhcpfXmEKk3cpC1--naS5TjsgfWDqY3ggTw/exec';
+  var dono = false, vid = 'anon';
+  try {
+    if (location.hash === '#dono') { localStorage.setItem('sussai.dono', '1'); alert('Pronto: este navegador não conta mais nas estatísticas do site.'); }
+    if (location.hash === '#visitante') { localStorage.removeItem('sussai.dono'); }
+    dono = localStorage.getItem('sussai.dono') === '1';
+    vid = localStorage.getItem('sussai.vid');
+    if (!vid) { vid = (Date.now().toString(36) + Math.random().toString(36).slice(2, 8)).slice(-12); localStorage.setItem('sussai.vid', vid); }
+  } catch (e) { }
+  function origem() {
+    try {
+      var m = /[?&]utm_source=([^&#]+)/.exec(location.search || ''); if (m) return decodeURIComponent(m[1]).slice(0, 40);
+      var r = document.referrer || ''; if (!r) return 'direto';
+      var h = r.split('/')[2] || ''; if (/github\.io$/.test(h)) return 'direto';
+      return h.replace(/^www\./, '').replace(/^(l|lnkd)\./, '').replace(/^(m|mobile)\./, '');
+    } catch (e) { return 'direto'; }
+  }
+  function ev(nome, det) {
+    if (dono) return;
+    try {
+      var s = JSON.stringify({ acao: 'evento', ev: nome, det: det || '', v: vid, o: origem(),
+        d: /Mobi|Android|iPhone/i.test((navigator && navigator.userAgent) || '') ? 'celular' : 'computador' });
+      if (navigator && navigator.sendBeacon && navigator.sendBeacon(STAT_URL, new Blob([s], { type: 'text/plain' }))) return;
+      if (typeof fetch === 'function') fetch(STAT_URL, { method: 'POST', mode: 'no-cors', body: s, keepalive: true });
+    } catch (e) { }
+  }
+  ev('visita');
+  /* cliques em links: downloads, manual, e-mails */
+  document.addEventListener('click', function (e) {
+    var a = e.target && e.target.closest ? e.target.closest('a') : null; if (!a) return;
+    var h = a.getAttribute('href') || '';
+    if (/SUSSAI_Teste_Windows\.zip/.test(h)) ev('download_teste');
+    else if (/SUSSAI_Completo\.zip/.test(h)) ev('download_completo');
+    else if (/Manual_do_Usuario\.pdf/.test(h)) ev('manual');
+    else if (/^mailto:/.test(h)) ev(/avisado/i.test(decodeURIComponent(h)) ? 'aviso' : 'contato');
+  }, true);
+
   /* ---------- menu no celular ---------- */
   var bg = $('burger'), mn = $('menu');
   if (bg && mn) { bg.onclick = function () { mn.classList.toggle('aberto'); }; mn.addEventListener('click', function (e) { if (e.target.tagName === 'A') mn.classList.remove('aberto'); }); }
@@ -262,12 +304,12 @@ var SUSSAI_CENAS = [
   var PARA = 'contato.sussai@gmail.com', md = $('compra');
   function abreCompra(plano) {
     if (plano) { var s = $('cPlano'); for (var i = 0; i < s.options.length; i++) if (s.options[i].text === plano) s.selectedIndex = i; }
-    grupo(); $('cMsg').textContent = ''; md.hidden = false;
+    grupo(); $('cMsg').textContent = ''; md.hidden = false; ev('comprar_abriu', $('cPlano').value);
     try { var g = JSON.parse(localStorage.getItem('sussai.pedido') || '{}'); ['cNome', 'cDoc', 'cFone', 'cEmail', 'cCidade', 'cInst'].forEach(function (id) { if (g[id] && !$(id).value) $(id).value = g[id]; }); } catch (e) { }
     setTimeout(function () { ($('cNome').value ? $('cFone') : $('cNome')).focus(); }, 50);
   }
   function grupo() { $('cGrupo').hidden = !/Coletiva/.test($('cPlano').value); }
-  Array.prototype.forEach.call(document.querySelectorAll('[data-plano]'), function (b) { b.addEventListener('click', function () { abreCompra(b.getAttribute('data-plano')); }); });
+  Array.prototype.forEach.call(document.querySelectorAll('[data-plano]'), function (b) { b.addEventListener('click', function () { ev('plano', b.getAttribute('data-plano')); abreCompra(b.getAttribute('data-plano')); }); });
   if (md) {
     $('cX').onclick = function () { md.hidden = true; };
     md.addEventListener('click', function (e) { if (e.target === md) md.hidden = true; });
@@ -307,15 +349,18 @@ var SUSSAI_CENAS = [
     $('cGmail').onclick = function () {
       var p = pedido(); if (!p) return;
       window.open('https://mail.google.com/mail/?view=cm&fs=1&to=' + encodeURIComponent(PARA) + '&su=' + encodeURIComponent(p.assunto) + '&body=' + encodeURIComponent(p.corpo), '_blank', 'noopener');
+      ev('comprar_enviou', $('cPlano').value.split(' – ')[0] + ' (Gmail)');
       msg('✔ O Gmail abriu com o pedido pronto. Confira e clique em Enviar.', true);
     };
     $('cMail').onclick = function () {
       var p = pedido(); if (!p) return;
       location.href = 'mailto:' + PARA + '?subject=' + encodeURIComponent(p.assunto) + '&body=' + encodeURIComponent(p.corpo);
+      ev('comprar_enviou', $('cPlano').value.split(' – ')[0] + ' (e-mail)');
       msg('✔ Abrindo o seu programa de e-mail… Se nada abrir, use “Enviar pelo Gmail” ou “Copiar mensagem”.', true);
     };
     $('cCopiar').onclick = function () {
       var p = pedido(); if (!p) return;
+      ev('comprar_enviou', $('cPlano').value.split(' – ')[0] + ' (copiou)');
       var txt = 'Para: ' + PARA + '\nAssunto: ' + p.assunto + '\n\n' + p.corpo;
       var ok = function () { msg('✔ Mensagem copiada. Cole num e-mail para ' + PARA + '.', true); };
       if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(ok, function () { prompt('Copie a mensagem:', txt); });
