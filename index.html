@@ -3,140 +3,193 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SUSSAI – Simulador de CLP 3D</title>
-<meta name="description" content="SUSSAI – simulador de CLP 3D para aulas de automação industrial: Ladder estilo Clic02 e LogixPro, 14 máquinas em 3D, defeitos para manutenção, NR-12 e gamificação. Teste grátis por 3 dias.">
+<title>SUSSAI – Simulador de CLP 3D | Teste grátis por 3 dias</title>
+<meta name="description" content="SUSSAI – simulador de CLP em Ladder (estilo WEG Clic02 e LogixPro) com 14 máquinas industriais em 3D, defeitos para manutenção, NR-12 e gamificação com nota. Teste grátis por 3 dias.">
 <meta property="og:title" content="SUSSAI – Simulador de CLP 3D">
 <meta property="og:description" content="Programe em Ladder e veja a máquina funcionar em 3D. Teste grátis por 3 dias.">
+<meta property="og:image" content="https://sussai-software.github.io/imagens/cena12.jpg">
 <link rel="stylesheet" href="estilo.css">
 <link rel="stylesheet" href="home.css">
 </head>
 <body class="home">
 
-<!-- ================= TOPO ================= -->
-<header class="topo">
+<header class="topo" id="topo">
   <a class="logo" href="#inicio">SUSSAI</a>
-  <nav>
-    <a href="#cenas">Cenas</a><a href="#recursos">Recursos</a><a href="#planos">Planos</a><a href="#como">Como funciona</a><a href="#duvidas">Dúvidas</a><a href="SUSSAI_Manual_do_Usuario.pdf" target="_blank">Manual</a>
-    <a class="btn mini" href="SUSSAI_Teste_Windows.zip" download>Baixar grátis</a>
+  <nav id="menu">
+    <a href="#cenas">Máquinas</a><a href="#recursos">Recursos</a><a href="#planos">Planos</a><a href="#completo">Já comprei</a>
+    <a href="#duvidas">Dúvidas</a><a href="SUSSAI_Manual_do_Usuario.pdf" target="_blank" rel="noopener">Manual</a>
+    <a class="btn mini" href="SUSSAI_Teste_Windows.zip" download>⬇ Teste grátis</a>
   </nav>
+  <button class="burger" id="burger" aria-label="Abrir menu">☰</button>
 </header>
 
-<!-- ================= CAPA (vídeo das cenas ao fundo) ================= -->
+<!-- ============ CAPA: imagens reais do SUSSAI passando ============ -->
 <section class="hero" id="inicio">
-  <!-- vídeo da capa do SUSSAI (gravado no programa com Ctrl+Shift+G). Arquivo: video/vitrine.webm ou video/vitrine.mp4 -->
-  <video id="bgVideo" autoplay muted loop playsinline preload="auto">
-    <source src="video/vitrine.mp4" type="video/mp4">
-    <source src="video/vitrine.webm" type="video/webm">
-  </video>
-  <!-- enquanto o vídeo não existir: animação de uma linha industrial -->
-  <canvas id="bgFabrica" aria-hidden="true"></canvas>
+  <div class="slides" id="slides" aria-hidden="true"></div>
+  <video id="bgVideo" muted loop playsinline preload="none"></video>
   <div class="veu"></div>
-
   <div class="hero-txt">
     <div class="selo">Para cursos técnicos e de aprendizagem industrial</div>
     <h1>Programe o CLP.<br><span>Veja a máquina funcionar em 3D.</span></h1>
-    <p>Simulador de CLP em <b>Ladder</b> (estilo WEG Clic02 e LogixPro) com <b>14 máquinas industriais em 3D</b>, defeitos para manutenção, segurança <b>NR-12</b> e <b>Modo Gamificação</b> com nota.</p>
+    <p>Simulador de CLP em <b>Ladder</b> (estilo WEG Clic02 e LogixPro) com <b>14 máquinas industriais em 3D</b>, defeitos para manutenção, segurança <b>NR-12</b> e <b>Modo Gamificação</b> com nota de 0 a 10.</p>
     <div class="acoes">
       <a class="btn grande" href="SUSSAI_Teste_Windows.zip" download>⬇ Baixar e testar 3 dias grátis</a>
       <a class="btn grande sec" href="#planos">Ver planos e valores</a>
     </div>
-    <p class="muted pequeno">Windows 10/11 · entre com a sua conta Google · sem cartão de crédito</p>
+    <p class="pequeno claro">Windows 10/11 · entre com a sua conta Google · sem cartão de crédito</p>
   </div>
-
-  <div class="legenda" id="legenda" aria-live="polite">
-    <span class="lg-num" id="lgNum">CENA 01</span><span class="lg-nome" id="lgNome">Esteira simples (sensor + caixa)</span>
+  <div class="legenda" id="legenda">
+    <span class="lg-num" id="lgNum">CENA 01</span>
+    <b class="lg-nome" id="lgNome"></b>
+    <span class="lg-cap" id="lgCap"></span>
     <div class="lg-barra"><i id="lgBarra"></i></div>
+    <div class="lg-pontos" id="lgPontos"></div>
   </div>
+  <p class="real">Imagens geradas pelo próprio SUSSAI</p>
 </section>
 
-<!-- ================= CENAS ================= -->
-<section class="faixa" id="cenas">
-  <div class="cx">
-    <h2>14 máquinas, da mais fácil à mais completa</h2>
-    <p class="muted">Cada cena tem entradas e saídas reais de CLP, programas prontos para estudar e desafios de defeito.</p>
-  </div>
-  <div class="trilho" id="trilho"></div>
+<!-- ============ NÚMEROS ============ -->
+<section class="numeros">
+  <div><b>14</b><span>máquinas em 3D</span></div>
+  <div><b>12</b><span>exercícios com nota</span></div>
+  <div><b>2</b><span>estilos: Clic02 e LogixPro</span></div>
+  <div><b>NR-12</b><span>emergência, bimanual, cortina de luz</span></div>
 </section>
 
-<!-- ================= RECURSOS ================= -->
-<section class="cx" id="recursos">
+<!-- ============ MÁQUINAS (galeria real) ============ -->
+<section class="cx" id="cenas">
+  <h2>As 14 máquinas, da mais fácil à mais completa</h2>
+  <p class="muted">Cada máquina tem entradas e saídas reais de CLP, programas prontos, desafios e defeitos para treinamento. Clique numa imagem para ampliar.</p>
+  <div class="galeria" id="galeria"></div>
+</section>
+
+<!-- ============ RECURSOS ============ -->
+<section class="faixa" id="recursos"><div class="cx">
   <h2>O que o SUSSAI oferece</h2>
   <div class="grade">
-    <div class="rec"><b>🪜 Ladder de verdade</b><p>Editor no estilo WEG Clic02 ou Allen-Bradley LogixPro: contatos NA/NF, bobinas, set/reset, temporizadores e contadores.</p></div>
-    <div class="rec"><b>🏭 Máquinas em 3D</b><p>Esteiras, semáforos, tanque misturador, envase, cancela, mesa giratória, prensa, elevador e mais – tudo reagindo ao seu programa.</p></div>
-    <div class="rec"><b>🛠 Treino de manutenção</b><p>Simule defeitos: relé térmico desarmado, sensor com falha, fio rompido, falta de contato. O aluno precisa achar e explicar.</p></div>
-    <div class="rec"><b>🛑 Segurança NR-12</b><p>Botão de emergência em todos os painéis, comando bimanual e cortina de luz. Cores de botões e sinaleiros conforme ABNT NBR IEC 60204-1.</p></div>
-    <div class="rec"><b>🏆 Modo Gamificação</b><p>Exercícios guiados com pontuação e nota de 0 a 10. Ótimo para avaliação prática em sala de aula.</p></div>
+    <div class="rec"><b>🪜 Ladder de verdade</b><p>Contatos NA/NF, bordas, bobinas, temporizadores TON/TOF e contadores CTU/CTD. Endereços no estilo WEG Clic02 (I01, Q01, M01) ou LogixPro (I:1/0, O:2/0, B3:0/0).</p></div>
+    <div class="rec"><b>🏭 Máquinas em 3D</b><p>Esteiras, semáforos com pedestres e carros, tanque misturador, envase, cancela, caixa d'água de prédio, mesa giratória, prensa e elevador – tudo obedecendo ao seu programa.</p></div>
+    <div class="rec"><b>🛠 Treino de manutenção</b><p>Relé térmico desarmando com fumaça, sensor sujo, fio rompido, contato colado, lâmpada queimada, burla do bimanual. O aluno precisa achar e explicar.</p></div>
+    <div class="rec"><b>🛑 Segurança NR-12</b><p>Botão de emergência em todos os painéis, comando bimanual com simultaneidade e cortina de luz. Cores conforme ABNT NBR IEC 60204-1.</p></div>
+    <div class="rec"><b>🏆 Modo Gamificação</b><p>Exercícios guiados: fazer na máquina, perguntas, defeito escondido e corrigir o programa. Nota de 0 a 10 guardada por aluno.</p></div>
     <div class="rec"><b>➕ Cenas extras (.cena)</b><p>Crie novas máquinas e distribua para outros instrutores: basta adicionar o arquivo .cena no programa.</p></div>
   </div>
-</section>
+</div></section>
 
-<!-- ================= PLANOS ================= -->
-<section class="faixa" id="planos">
-  <div class="cx">
-    <h2>Planos e valores</h2>
-    <p class="muted">Todos os planos liberam as <b>14 cenas</b>, o <b>Modo Gamificação</b> e as cenas extras. O prazo começa a contar na liberação.</p>
-    <div class="precos">
-      <div class="plano">
-        <h3>Mensal</h3><div class="valor"><small>R$</small>30<small>,00</small></div><div class="per">1 mês</div>
-        <ul><li>2 computadores ao mesmo tempo</li><li>Todas as cenas</li></ul>
-        <a class="btn" href="mailto:contato.sussai@gmail.com?subject=Quero%20o%20plano%20MENSAL%20do%20SUSSAI">Quero este</a>
-      </div>
-      <div class="plano">
-        <h3>Trimestral</h3><div class="valor"><small>R$</small>60<small>,00</small></div><div class="per">3 meses</div>
-        <ul><li>2 computadores ao mesmo tempo</li><li>Sai por R$ 20,00 por mês</li></ul>
-        <a class="btn" href="mailto:contato.sussai@gmail.com?subject=Quero%20o%20plano%20TRIMESTRAL%20do%20SUSSAI">Quero este</a>
-      </div>
-      <div class="plano">
-        <h3>Semestral</h3><div class="valor"><small>R$</small>110<small>,00</small></div><div class="per">6 meses</div>
-        <ul><li>2 computadores ao mesmo tempo</li><li>Sai por R$ 18,33 por mês</li></ul>
-        <a class="btn" href="mailto:contato.sussai@gmail.com?subject=Quero%20o%20plano%20SEMESTRAL%20do%20SUSSAI">Quero este</a>
-      </div>
-      <div class="plano destaque">
-        <div class="fita">Melhor escolha</div>
-        <h3>Vitalícia</h3><div class="valor"><small>R$</small>200<small>,00</small></div><div class="per">pagamento único</div>
-        <ul><li>2 computadores ao mesmo tempo</li><li>Nunca vence</li></ul>
-        <a class="btn" href="mailto:contato.sussai@gmail.com?subject=Quero%20a%20licen%C3%A7a%20VITAL%C3%8DCIA%20do%20SUSSAI">Quero este</a>
-      </div>
-      <div class="plano grupo">
-        <h3>Coletiva</h3><div class="valor"><small>R$</small>1.000<small>,00</small></div><div class="per">por ano</div>
-        <ul><li>Escolas, laboratórios e empresas</li><li>Até 20 computadores ao mesmo tempo</li></ul>
-        <a class="btn" href="mailto:contato.sussai@gmail.com?subject=Quero%20a%20licen%C3%A7a%20COLETIVA%20do%20SUSSAI">Quero este</a>
-      </div>
-    </div>
-    <p class="muted pequeno">Precisa de mais computadores na licença coletiva? Fale com a gente: <a href="mailto:contato.sussai@gmail.com">contato.sussai@gmail.com</a></p>
+<!-- ============ PLANOS ============ -->
+<section class="cx" id="planos">
+  <h2>Planos e valores</h2>
+  <p class="muted">Todos os planos liberam as <b>14 máquinas</b>, os <b>12 exercícios</b> do Modo Gamificação e as cenas extras. O prazo começa a contar na liberação.</p>
+  <div class="precos">
+    <div class="plano"><h3>Mensal</h3><div class="valor"><small>R$</small>30<small>,00</small></div><div class="per">1 mês</div>
+      <ul><li>2 computadores ao mesmo tempo</li><li>Ideal para conhecer</li></ul><button class="btn" data-plano="Mensal (1 mês) – R$ 30,00">Comprar</button></div>
+    <div class="plano"><h3>Trimestral</h3><div class="valor"><small>R$</small>60<small>,00</small></div><div class="per">3 meses</div>
+      <ul><li>2 computadores ao mesmo tempo</li><li>Sai por R$ 20,00 por mês</li></ul><button class="btn" data-plano="Trimestral (3 meses) – R$ 60,00">Comprar</button></div>
+    <div class="plano"><h3>Semestral</h3><div class="valor"><small>R$</small>110<small>,00</small></div><div class="per">6 meses</div>
+      <ul><li>2 computadores ao mesmo tempo</li><li>Sai por R$ 18,33 por mês</li></ul><button class="btn" data-plano="Semestral (6 meses) – R$ 110,00">Comprar</button></div>
+    <div class="plano destaque"><div class="fita">Melhor escolha</div><h3>Vitalícia</h3><div class="valor"><small>R$</small>200<small>,00</small></div><div class="per">pagamento único</div>
+      <ul><li>2 computadores ao mesmo tempo</li><li>Nunca vence</li></ul><button class="btn" data-plano="Vitalícia – R$ 200,00 (pagamento único)">Comprar</button></div>
+    <div class="plano grupo"><h3>Coletiva</h3><div class="valor"><small>R$</small>1.000<small>,00</small></div><div class="per">por ano</div>
+      <ul><li>Escolas, laboratórios e empresas</li><li>Até 20 computadores ao mesmo tempo</li></ul><button class="btn" data-plano="Coletiva – escola/laboratório (1 ano, até 20 PCs) – R$ 1.000,00">Comprar</button></div>
   </div>
+  <p class="muted pequeno">Ao clicar em <b>Comprar</b> abre um formulário rápido: ele monta o e-mail do pedido completo para você. Dúvidas: <a href="mailto:contato.sussai@gmail.com">contato.sussai@gmail.com</a></p>
 </section>
 
-<!-- ================= COMO FUNCIONA ================= -->
+<!-- ============ JÁ COMPREI: BAIXAR O COMPLETO ============ -->
+<section class="faixa" id="completo"><div class="cx">
+  <h2>Já comprei: como baixar o SUSSAI Completo</h2>
+  <div class="dois">
+    <ol class="passos">
+      <li>Depois do pagamento, você recebe a confirmação por e-mail ou WhatsApp e a sua licença é <b>liberada na sua conta Google</b>.</li>
+      <li>Se você usa o <b>SUSSAI Teste</b>, ao abrir ele já mostra o botão <b>“Baixar o SUSSAI Completo”</b>. Ou baixe aqui ao lado.</li>
+      <li>Descompacte o arquivo (botão direito ▸ <i>Extrair tudo</i>) e abra o <b>SUSSAI.exe</b>.</li>
+      <li>Entre com a <b>mesma conta Google da compra</b> (se já usou o Teste neste computador, abre direto). Pode apagar o SUSSAI Teste.</li>
+    </ol>
+    <div class="baixar">
+      <div class="ic">📦</div>
+      <b>SUSSAI Completo</b>
+      <span>14 máquinas · 12 exercícios · Windows 10/11</span>
+      <a class="btn grande" href="completo/SUSSAI_Completo.zip" download>⬇ Baixar o SUSSAI Completo</a>
+      <small>Abre somente com licença paga liberada na sua conta Google. Sem licença, ele mostra como comprar.</small>
+    </div>
+  </div>
+</div></section>
+
+<!-- ============ COMO FUNCIONA ============ -->
 <section class="cx" id="como">
-  <h2>Como funciona</h2>
+  <h2>Como funciona o teste grátis</h2>
   <ol class="passos">
-    <li><b>Baixe</b> o SUSSAI, descompacte e abra o <b>SUSSAI.exe</b>.</li>
-    <li><b>Entre com a sua conta Google</b> e ganhe <b>3 dias grátis</b> na hora (as 3 primeiras cenas liberadas).</li>
-    <li>Gostou? Clique em <b>“Quero comprar”</b> dentro do programa ou escreva para <a href="mailto:contato.sussai@gmail.com">contato.sussai@gmail.com</a> com o plano e o seu e-mail Google.</li>
-    <li>Depois do pagamento, a licença é liberada e o <b>SUSSAI atualiza sozinho</b>, com todas as cenas.</li>
+    <li><b>Baixe</b> o SUSSAI Teste, descompacte e abra o <b>SUSSAI_Teste.exe</b>.</li>
+    <li>Digite <b>nome e WhatsApp</b> e clique em <b>Entrar com Google</b>: <b>3 dias grátis</b> na hora, com as máquinas 01, 02 e 03 (modo normal e gamificação).</li>
+    <li>Gostou? Clique em <b>Comprar</b> aqui no site ou em <b>“Quero comprar”</b> dentro do programa.</li>
+    <li>Pagou, liberou: baixe o <b>SUSSAI Completo</b> e use todas as máquinas.</li>
   </ol>
 </section>
 
-<!-- ================= DÚVIDAS ================= -->
-<section class="faixa" id="duvidas">
-  <div class="cx">
-    <h2>Dúvidas frequentes</h2>
-    <details><summary>Precisa de internet?</summary><p>Só para entrar com a conta Google e liberar a licença. Depois o SUSSAI funciona sem internet até o fim do plano.</p></details>
-    <details><summary>Em quantos computadores posso usar?</summary><p>Os planos individuais permitem 2 computadores ao mesmo tempo com a mesma conta Google. A licença coletiva permite até 20. Trocou de computador? Use “Desconectar este computador” no menu Ajuda ▸ Licença.</p></details>
-    <details><summary>O que acontece quando o plano acaba?</summary><p>O SUSSAI para de abrir até a renovação. Seus programas e notas continuam salvos no computador.</p></details>
-    <details><summary>O Windows mostrou um aviso ao abrir. É seguro?</summary><p>Sim. Por ser um programa novo, o Windows pode mostrar “O Windows protegeu o computador”. Clique em “Mais informações” ▸ “Executar assim mesmo”.</p></details>
-    <details><summary>Posso desistir da compra?</summary><p>Sim, em até 7 dias após a liberação, com devolução do valor (Código de Defesa do Consumidor, art. 49). Veja os <a href="termos.html">Termos de uso</a>.</p></details>
-  </div>
-</section>
+<!-- ============ DÚVIDAS ============ -->
+<section class="faixa" id="duvidas"><div class="cx">
+  <h2>Dúvidas frequentes</h2>
+  <details><summary>Como faço o pagamento?</summary><p>Preencha o formulário do botão <b>Comprar</b>: o e-mail do pedido sai pronto. Respondemos com os dados para pagamento (Pix ou transferência) e liberamos a licença assim que o pagamento é confirmado.</p></details>
+  <details><summary>Precisa de internet?</summary><p>Só para entrar com a conta Google e liberar a licença. Depois o SUSSAI funciona sem internet até o fim do plano.</p></details>
+  <details><summary>Em quantos computadores posso usar?</summary><p>Os planos individuais permitem 2 computadores ao mesmo tempo com a mesma conta Google. A licença coletiva permite até 20. Trocou de computador? Use “Desconectar este computador” em Ajuda ▸ Licença.</p></details>
+  <details><summary>O que acontece quando o plano acaba?</summary><p>O SUSSAI para de abrir até a renovação. Seus programas e notas continuam salvos no computador.</p></details>
+  <details><summary>O Windows mostrou um aviso ao abrir. É seguro?</summary><p>Sim. Por ser um programa novo, o Windows pode mostrar “O Windows protegeu o computador”. Clique em “Mais informações” ▸ “Executar assim mesmo”.</p></details>
+  <details><summary>Posso desistir da compra?</summary><p>Sim, em até 7 dias após a liberação, com devolução do valor (Código de Defesa do Consumidor, art. 49). Veja os <a href="termos.html">Termos de uso</a>.</p></details>
+  <details><summary>Tem manual?</summary><p>Sim: <a href="SUSSAI_Manual_do_Usuario.pdf" target="_blank" rel="noopener">Manual do Usuário em PDF</a> com todas as máquinas, entradas/saídas, exercícios e solução de problemas.</p></details>
+</div></section>
 
 <footer>
   <p><b>SUSSAI – Simulador de CLP 3D</b> · Idealizado e desenvolvido por Eng. Ronaldo Sussai Soares – Engenheiro Eletricista ·
     <a href="https://www.linkedin.com/in/eng-sussai/" target="_blank" rel="noopener">LinkedIn</a></p>
   <p><a href="mailto:contato.sussai@gmail.com">contato.sussai@gmail.com</a> · <a href="privacidade.html">Política de privacidade</a> · <a href="termos.html">Termos de uso</a> · © 2026 SUSSAI</p>
+  <p class="pequeno">WEG, Clic02, Allen-Bradley e LogixPro são marcas de seus proprietários. O SUSSAI é um simulador independente, de uso didático.</p>
 </footer>
 
+<!-- ============ AMPLIAR IMAGEM ============ -->
+<div class="lb" id="lb" hidden><button class="lb-x" id="lbX" aria-label="Fechar">✕</button><button class="lb-p" id="lbP" aria-label="Anterior">‹</button>
+  <figure><img id="lbImg" alt=""><figcaption id="lbCap"></figcaption></figure><button class="lb-n" id="lbN" aria-label="Próxima">›</button></div>
+
+<!-- ============ FORMULÁRIO DE COMPRA ============ -->
+<div class="modal" id="compra" hidden>
+  <form class="caixa" id="fCompra" novalidate>
+    <button type="button" class="fechar" id="cX" aria-label="Fechar">✕</button>
+    <h3>🛒 Pedido de licença do SUSSAI</h3>
+    <p class="muted pequeno">Preencha e clique em enviar: o e-mail sai pronto, com assunto e todos os dados. Nenhum dado fica guardado neste site.</p>
+    <label>Plano<select id="cPlano" required>
+      <option>Mensal (1 mês) – R$ 30,00</option><option>Trimestral (3 meses) – R$ 60,00</option><option>Semestral (6 meses) – R$ 110,00</option>
+      <option>Vitalícia – R$ 200,00 (pagamento único)</option><option>Coletiva – escola/laboratório (1 ano, até 20 PCs) – R$ 1.000,00</option></select></label>
+    <div class="col2">
+      <label>Nome completo *<input id="cNome" autocomplete="name" required></label>
+      <label>CPF ou CNPJ <small>(para o recibo)</small><input id="cDoc" inputmode="numeric" placeholder="000.000.000-00"></label>
+    </div>
+    <div class="col2">
+      <label>Celular / WhatsApp com DDD *<input id="cFone" type="tel" autocomplete="tel" placeholder="(11) 98765-4321" required></label>
+      <label>E-mail Google que vai usar no SUSSAI *<input id="cEmail" type="email" autocomplete="email" placeholder="seunome@gmail.com" required></label>
+    </div>
+    <div class="col2">
+      <label>Cidade / UF *<input id="cCidade" autocomplete="address-level2" placeholder="Campinas / SP" required></label>
+      <label>Forma de pagamento<select id="cPag"><option>Pix</option><option>Transferência bancária</option><option>Boleto (instituições)</option></select></label>
+    </div>
+    <div id="cGrupo" hidden>
+      <div class="col2">
+        <label>Escola / empresa *<input id="cInst" autocomplete="organization"></label>
+        <label>Nº de computadores<input id="cPcs" type="number" min="1" max="200" value="20"></label>
+      </div>
+      <label>E-mails Google dos computadores <small>(pode enviar depois)</small><textarea id="cEmails" rows="2"></textarea></label>
+    </div>
+    <label>Observações<textarea id="cObs" rows="2" placeholder="Ex.: preciso de nota fiscal, sou instrutor, prazo..."></textarea></label>
+    <label class="chk"><input type="checkbox" id="cOk"> Li e aceito os <a href="termos.html" target="_blank">Termos de uso</a> e a <a href="privacidade.html" target="_blank">Política de privacidade</a>.</label>
+    <div class="ms" id="cMsg"></div>
+    <div class="acoes">
+      <button type="button" class="btn" id="cGmail">✉ Enviar pelo Gmail</button>
+      <button type="button" class="btn sec2" id="cMail">Abrir no meu e-mail</button>
+      <button type="button" class="btn sec2" id="cCopiar">Copiar mensagem</button>
+    </div>
+    <p class="muted pequeno">Se o e-mail não abrir, use <b>Copiar mensagem</b> e cole num e-mail para <b>contato.sussai@gmail.com</b>.</p>
+  </form>
+</div>
+
+<script src="cenas.js"></script>
 <script src="home.js"></script>
 </body>
 </html>

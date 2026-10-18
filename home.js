@@ -1,128 +1,136 @@
-/* SUSSAI – página inicial: cenas passando, legenda e fundo animado */
+/* SUSSAI – página inicial: capa com imagens reais passando, galeria, formulário de compra */
 (function () {
   'use strict';
-  var CENAS = [
-    ['📦', 'Esteira simples (sensor + caixa)', 'A caixa no sensor B1 liga a esteira; ao cair no recipiente (B2), ela desliga. A primeira lógica de todo aluno.'],
-    ['🌀', 'Ventilador industrial (partida direta)', 'Partida direta com selo, sinalização e relé térmico – o clássico do comando elétrico.'],
-    ['🧪', 'Tanque misturador (bomba + agitador)', 'A bomba enche, o agitador mistura por tempo e o produto pronto sai pela válvula.'],
-    ['🚸', 'Semáforo de uma via com travessia de pedestres', 'Semáforo sob demanda: os carros ficam no verde até o pedestre apertar a botoeira.'],
-    ['🚦', 'Semáforo de duas vias com pedestres', 'Dois semáforos e travessia por botoeira. Se as duas vias abrirem juntas, há colisão!'],
-    ['✳', 'Cruzamento de 4 vias (4 semáforos)', 'Duas avenidas de mão dupla, semáforos de carros e de pedestres com botoeiras.'],
-    ['🚧', 'Cancela de estacionamento', 'Cancela articulada: o carro chega, o laço detecta, a cancela abre e fecha depois da passagem.'],
-    ['🍾', 'Envase de garrafas (silo + válvula)', 'A garrafa para sob o silo, a válvula enche, o sensor de cheio fecha e a próxima chega.'],
-    ['🏢', 'Caixa d\'água de prédio (bombas A/B)', 'Cisterna e caixa superior com boia: automático ou manual, com bomba reserva.'],
-    ['🔄', 'Mesa giratória (separa por tamanho)', 'Sensores identificam a caixa e a mesa gira para separar peças altas e baixas.'],
-    ['🛤', '4 esteiras em cascata + operador', 'Acúmulo de caixas: as esteiras param em cascata enquanto o operador empilha no palete.'],
-    ['🗜', 'Prensa hidráulica – bimanual e cortina de luz (NR-12)', 'A prensa só desce com as duas mãos nos botões ao mesmo tempo; a cortina de luz para tudo.'],
-    ['🏭', 'Esteira com separação (avançado)', 'Linha completa: alimentador pneumático, sensores, desviador, quadro elétrico e emergência.'],
-    ['🛗', 'Elevador de pessoas (4 andares)', 'Chamadas com registro, sensores de andar, porta automática com cortina de luz e relé térmico.']
-  ];
-  var n2 = function (i) { return (i < 9 ? '0' : '') + (i + 1); };
-  var esc = function (t) { return String(t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+  var C = window.SUSSAI_CENAS || [], $ = function (id) { return document.getElementById(id); };
+  var esc = function (t) { return String(t == null ? '' : t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+  var img = function (c) { return 'imagens/cena' + c.n + '.jpg'; };
 
-  /* ---- trilho de cenas (2 voltas para o movimento contínuo) ---- */
-  var tr = document.getElementById('trilho');
-  if (tr) {
-    var html = '';
-    for (var v = 0; v < 2; v++) CENAS.forEach(function (c, i) {
-      html += '<div class="cena"' + (v ? ' aria-hidden="true"' : '') + '>' +
-        '<img src="imagens/cena' + n2(i) + '.jpg" alt="' + esc(c[1]) + '" loading="lazy" data-ic="' + c[0] + '">' +
-        '<div class="t"><span class="n">CENA ' + n2(i) + '</span><b>' + esc(c[1]) + '</b><span>' + esc(c[2]) + '</span></div></div>';
+  /* ---------- menu no celular ---------- */
+  var bg = $('burger'), mn = $('menu');
+  if (bg && mn) { bg.onclick = function () { mn.classList.toggle('aberto'); }; mn.addEventListener('click', function (e) { if (e.target.tagName === 'A') mn.classList.remove('aberto'); }); }
+
+  /* ---------- capa: as 14 máquinas passando (imagens reais) ---------- */
+  var sl = $('slides'), k = 0, T = 7000, t0 = Date.now(), parado = false, ims = [];
+  if (sl && C.length) {
+    C.forEach(function (c, i) { var im = document.createElement('img'); im.alt = c.nome; if (i < 2) im.src = img(c); else im.dataset.src = img(c); sl.appendChild(im); ims.push(im); });
+    var pts = $('lgPontos');
+    C.forEach(function (c, i) { var b = document.createElement('button'); b.title = c.n + ' – ' + c.nome; b.onclick = function () { mostra(i); }; pts.appendChild(b); });
+  }
+  function mostra(i) {
+    k = (i + C.length) % C.length; t0 = Date.now();
+    ims.forEach(function (im, j) { if (j === k) { if (im.dataset.src) { im.src = im.dataset.src; delete im.dataset.src; } im.classList.remove('on'); void im.offsetWidth; im.classList.add('on'); } else im.classList.remove('on'); });
+    var nx = ims[(k + 1) % ims.length]; if (nx && nx.dataset.src) { nx.src = nx.dataset.src; delete nx.dataset.src; }   // pré-carrega a próxima
+    var c = C[k];
+    $('lgNum').textContent = 'CENA ' + c.n + (c.teste ? ' · NO TESTE GRÁTIS' : '');
+    $('lgNome').textContent = c.ic + '  ' + (c.tit || c.nome);
+    $('lgCap').textContent = c.cap || c.desc;
+    Array.prototype.forEach.call($('lgPontos').children, function (b, j) { b.classList.toggle('on', j === k); });
+  }
+  if (C.length) mostra(0);
+  var leg = $('legenda');
+  if (leg) { leg.onmouseenter = function () { parado = true; }; leg.onmouseleave = function () { parado = false; t0 = Date.now() - (parseFloat($('lgBarra').style.width) || 0) / 100 * T; }; }
+  setInterval(function () {
+    if (!C.length || parado || document.hidden) return;
+    var p = (Date.now() - t0) / T;
+    if (p >= 1) { mostra(k + 1); p = 0; }
+    $('lgBarra').style.width = (p * 100).toFixed(1) + '%';
+  }, 100);
+  /* vídeo da capa (opcional): se existir video/vitrine.mp4 ou .webm, ele substitui as imagens */
+  var v = $('bgVideo');
+  if (v) {
+    ['mp4', 'webm'].forEach(function (x) { var s = document.createElement('source'); s.src = 'video/vitrine.' + x; s.type = 'video/' + x; v.appendChild(s); });
+    v.addEventListener('playing', function () { v.classList.add('ok'); sl.style.display = 'none'; leg.style.display = 'none'; });
+    v.load(); var pr = v.play(); if (pr && pr.catch) pr.catch(function () { });
+  }
+
+  /* ---------- galeria ---------- */
+  var gal = $('galeria');
+  if (gal) {
+    gal.innerHTML = C.map(function (c, i) {
+      return '<div class="card" data-i="' + i + '"><img src="' + img(c) + '" alt="' + esc(c.nome) + '" loading="lazy"><div>' +
+        (c.teste ? '<span class="tag">no teste grátis</span>' : '') + '<span class="n">CENA ' + c.n + '</span><b>' + esc(c.ic + ' ' + c.nome) + '</b>' +
+        '<span class="d">' + esc(c.desc) + '</span><div class="info">' + c.ent + ' entradas · ' + c.sai + ' saídas · ' + c.prog + ' programas · ' + c.def + ' defeitos</div></div></div>';
+    }).join('');
+    gal.addEventListener('click', function (e) { var c = e.target.closest('.card'); if (c) abreLb(+c.dataset.i); });
+  }
+  var li = 0;
+  function abreLb(i) {
+    li = (i + C.length) % C.length; var c = C[li];
+    $('lbImg').src = img(c); $('lbImg').alt = c.nome;
+    $('lbCap').innerHTML = '<b>Cena ' + c.n + ' – ' + esc(c.nome) + '</b>' + esc(c.desc) + (c.cap ? '<br><span style="color:#8b949e">' + esc(c.cap) + '</span>' : '');
+    $('lb').hidden = false;
+  }
+  if ($('lb')) {
+    $('lbX').onclick = function () { $('lb').hidden = true; };
+    $('lbP').onclick = function () { abreLb(li - 1); }; $('lbN').onclick = function () { abreLb(li + 1); };
+    $('lb').addEventListener('click', function (e) { if (e.target.id === 'lb') $('lb').hidden = true; });
+  }
+
+  /* ---------- formulário de compra: monta o e-mail completo ---------- */
+  var PARA = 'contato.sussai@gmail.com', md = $('compra');
+  function abreCompra(plano) {
+    if (plano) { var s = $('cPlano'); for (var i = 0; i < s.options.length; i++) if (s.options[i].text === plano) s.selectedIndex = i; }
+    grupo(); $('cMsg').textContent = ''; md.hidden = false;
+    try { var g = JSON.parse(localStorage.getItem('sussai.pedido') || '{}'); ['cNome', 'cDoc', 'cFone', 'cEmail', 'cCidade', 'cInst'].forEach(function (id) { if (g[id] && !$(id).value) $(id).value = g[id]; }); } catch (e) { }
+    setTimeout(function () { ($('cNome').value ? $('cFone') : $('cNome')).focus(); }, 50);
+  }
+  function grupo() { $('cGrupo').hidden = !/Coletiva/.test($('cPlano').value); }
+  Array.prototype.forEach.call(document.querySelectorAll('[data-plano]'), function (b) { b.addEventListener('click', function () { abreCompra(b.getAttribute('data-plano')); }); });
+  if (md) {
+    $('cX').onclick = function () { md.hidden = true; };
+    md.addEventListener('click', function (e) { if (e.target === md) md.hidden = true; });
+    $('cPlano').onchange = grupo;
+    $('cFone').addEventListener('input', function () {
+      var d = this.value.replace(/\D/g, '').replace(/^55(?=\d{11})/, '').slice(0, 11);
+      this.value = d.length > 6 ? '(' + d.slice(0, 2) + ') ' + d.slice(2, 7) + '-' + d.slice(7) : d.length > 2 ? '(' + d.slice(0, 2) + ') ' + d.slice(2) : d;
     });
-    tr.innerHTML = html;
-    // sem foto da cena? mostra o ícone no lugar
-    Array.prototype.forEach.call(tr.querySelectorAll('img'), function (im) {
-      im.onerror = function () { var d = document.createElement('div'); d.className = 'ic'; d.textContent = im.getAttribute('data-ic'); im.replaceWith(d); };
-    });
   }
-
-  /* ---- vídeo de fundo: se existir, aparece; se não, fica a animação ---- */
-  var vid = document.getElementById('bgVideo'), cv = document.getElementById('bgFabrica'), leg = document.getElementById('legenda');
-  var usandoVideo = false;
-  if (vid) {
-    vid.addEventListener('playing', function () { usandoVideo = true; vid.classList.add('ok'); if (cv) cv.style.display = 'none'; if (leg) leg.style.display = 'none'; });
-    var srcs = vid.querySelectorAll('source'), last = srcs[srcs.length - 1];   // só desiste se TODOS os formatos falharem
-    if (last) last.addEventListener('error', function () { if (vid) { vid.remove(); vid = null; } });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { if (md) md.hidden = true; if ($('lb')) $('lb').hidden = true; } });
+  function msg(t, ok) { var m = $('cMsg'); m.textContent = t; m.className = 'ms ' + (ok ? 'ok' : 'er'); }
+  function pedido() {
+    var v = function (id) { return ($(id).value || '').trim(); }, erro = null;
+    ['cNome', 'cFone', 'cEmail', 'cCidade', 'cInst'].forEach(function (id) { $(id).classList.remove('erro'); });
+    var marca = function (id, t) { $(id).classList.add('erro'); if (!erro) { erro = t; $(id).focus(); } };
+    if (v('cNome').split(/\s+/).length < 2) marca('cNome', 'Escreva o seu nome completo (nome e sobrenome).');
+    if (v('cFone').replace(/\D/g, '').length < 10) marca('cFone', 'Informe o celular/WhatsApp com DDD.');
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v('cEmail'))) marca('cEmail', 'Informe um e-mail válido (o e-mail Google que vai usar no SUSSAI).');
+    if (!v('cCidade')) marca('cCidade', 'Informe a cidade e o estado.');
+    var col = /Coletiva/.test(v('cPlano'));
+    if (col && !v('cInst')) marca('cInst', 'Informe o nome da escola ou empresa.');
+    if (!erro && !$('cOk').checked) erro = 'Marque que você leu e aceita os Termos de uso.';
+    if (erro) { msg('✖ ' + erro); return null; }
+    try { var g = {}; ['cNome', 'cDoc', 'cFone', 'cEmail', 'cCidade', 'cInst'].forEach(function (id) { g[id] = v(id); }); localStorage.setItem('sussai.pedido', JSON.stringify(g)); } catch (e) { }
+    var plano = v('cPlano'), curto = plano.split(' – ')[0];
+    var L = ['Olá! Quero comprar uma licença do SUSSAI – Simulador de CLP 3D.', '',
+      '=== PEDIDO ===', 'Plano: ' + plano, 'Forma de pagamento: ' + v('cPag'), '',
+      '=== MEUS DADOS ===', 'Nome completo: ' + v('cNome'), 'CPF/CNPJ: ' + (v('cDoc') || '(não informado)'), 'Celular/WhatsApp: ' + v('cFone'),
+      'E-mail Google para a licença: ' + v('cEmail'), 'Cidade/UF: ' + v('cCidade')];
+    if (col) L.push('', '=== LICENÇA COLETIVA ===', 'Escola/empresa: ' + v('cInst'), 'Nº de computadores: ' + (v('cPcs') || '20'), 'E-mails Google dos computadores: ' + (v('cEmails') || '(envio depois)'));
+    if (v('cObs')) L.push('', 'Observações: ' + v('cObs'));
+    L.push('', 'Li e aceito os Termos de uso e a Política de privacidade (sussai-software.github.io).', '',
+      'Aguardo os dados para pagamento. Depois da confirmação, a licença é liberada nesse e-mail Google', 'e eu baixo o SUSSAI Completo em https://sussai-software.github.io/#completo', '', 'Obrigado!', v('cNome'));
+    return { assunto: 'Pedido de licença SUSSAI – ' + curto + ' – ' + v('cNome'), corpo: L.join('\n') };
   }
-
-  /* ---- legenda com o nome das cenas (como na vitrine do programa) ---- */
-  var k = 0, T = 5000, t0 = Date.now();
-  var lgNum = document.getElementById('lgNum'), lgNome = document.getElementById('lgNome'), lgBarra = document.getElementById('lgBarra');
-  function trocaLegenda() {
-    if (!lgNome) return;
-    lgNome.style.opacity = 0;
-    setTimeout(function () { lgNum.textContent = 'CENA ' + n2(k); lgNome.textContent = CENAS[k][0] + '  ' + CENAS[k][1]; lgNome.style.opacity = 1; }, 350);
+  if (md) {
+    $('cGmail').onclick = function () {
+      var p = pedido(); if (!p) return;
+      window.open('https://mail.google.com/mail/?view=cm&fs=1&to=' + encodeURIComponent(PARA) + '&su=' + encodeURIComponent(p.assunto) + '&body=' + encodeURIComponent(p.corpo), '_blank', 'noopener');
+      msg('✔ O Gmail abriu com o pedido pronto. Confira e clique em Enviar.', true);
+    };
+    $('cMail').onclick = function () {
+      var p = pedido(); if (!p) return;
+      location.href = 'mailto:' + PARA + '?subject=' + encodeURIComponent(p.assunto) + '&body=' + encodeURIComponent(p.corpo);
+      msg('✔ Abrindo o seu programa de e-mail… Se nada abrir, use “Enviar pelo Gmail” ou “Copiar mensagem”.', true);
+    };
+    $('cCopiar').onclick = function () {
+      var p = pedido(); if (!p) return;
+      var txt = 'Para: ' + PARA + '\nAssunto: ' + p.assunto + '\n\n' + p.corpo;
+      var ok = function () { msg('✔ Mensagem copiada. Cole num e-mail para ' + PARA + '.', true); };
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(ok, function () { prompt('Copie a mensagem:', txt); });
+      else { prompt('Copie a mensagem:', txt); ok(); }
+    };
   }
-  trocaLegenda();
-
-  /* ---- fundo animado: linha industrial (esteira, caixas, sensor, tanque, semáforo, Ladder) ---- */
-  var cx = cv && cv.getContext ? cv.getContext('2d') : null, W = 0, H = 0, DPR = 1;
-  function tam() { if (!cv) return; DPR = Math.min(window.devicePixelRatio || 1, 2); W = cv.clientWidth; H = cv.clientHeight; cv.width = W * DPR; cv.height = H * DPR; }
-  window.addEventListener('resize', tam); tam();
-  var caixas = [0, 0.33, 0.66], quieto = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  function ret(x, y, w, h, c) { cx.fillStyle = c; cx.fillRect(x, y, w, h); }
-  function luz(x, y, r, c, on) {
-    cx.beginPath(); cx.arc(x, y, r, 0, 7); cx.fillStyle = on ? c : '#1d242c'; cx.fill();
-    if (on) { cx.save(); cx.globalAlpha = 0.25; cx.beginPath(); cx.arc(x, y, r * 2.6, 0, 7); cx.fill(); cx.restore(); }
-  }
-  function quadro(t) {
-    if (!cx || usandoVideo) return;
-    var s = H / 900, base = H * 0.72, x0 = W * 0.38, x1 = W * 0.98;
-    cx.setTransform(DPR, 0, 0, DPR, 0, 0);
-    var g = cx.createLinearGradient(0, 0, 0, H); g.addColorStop(0, '#0b1420'); g.addColorStop(1, '#05080c'); cx.fillStyle = g; cx.fillRect(0, 0, W, H);
-    // grade do piso (perspectiva)
-    cx.strokeStyle = '#ffffff0d'; cx.lineWidth = 1;
-    for (var i = 0; i < 26; i++) { var yy = base + 40 * s + Math.pow(i / 25, 2) * (H - base); cx.beginPath(); cx.moveTo(0, yy); cx.lineTo(W, yy); cx.stroke(); }
-    for (i = -12; i <= 12; i++) { cx.beginPath(); cx.moveTo(W * 0.66 + i * 40 * s, base + 40 * s); cx.lineTo(W * 0.66 + i * 220 * s, H); cx.stroke(); }
-    // Ladder ao fundo (linhas acendendo)
-    var lx = W * 0.42, ly = H * 0.12, lw = W * 0.5, lh = H * 0.3;
-    cx.strokeStyle = '#2f81f733'; cx.lineWidth = 2 * s;
-    cx.beginPath(); cx.moveTo(lx, ly); cx.lineTo(lx, ly + lh); cx.moveTo(lx + lw, ly); cx.lineTo(lx + lw, ly + lh); cx.stroke();
-    for (i = 0; i < 4; i++) {
-      var ry = ly + (i + 0.5) * lh / 4, on = ((t / 1400 + i * 0.7) % 3) < 1.6;
-      cx.strokeStyle = on ? '#56d36488' : '#2f81f733'; cx.beginPath(); cx.moveTo(lx, ry); cx.lineTo(lx + lw, ry); cx.stroke();
-      for (var c = 0; c < 2; c++) { var cxp = lx + lw * (0.18 + c * 0.25); ret(cxp - 10 * s, ry - 12 * s, 3 * s, 24 * s, on ? '#56d364aa' : '#2f81f755'); ret(cxp + 7 * s, ry - 12 * s, 3 * s, 24 * s, on ? '#56d364aa' : '#2f81f755'); }
-      cx.beginPath(); cx.arc(lx + lw * 0.86, ry, 12 * s, 0, 7); cx.strokeStyle = on ? '#56d364cc' : '#2f81f755'; cx.stroke();
-    }
-    // tanque
-    var tx = W * 0.44, ty = base - 250 * s, tw = 90 * s, th = 170 * s, nv = (Math.sin(t / 2600) * 0.5 + 0.5);
-    ret(tx, ty, tw, th, '#1b2733'); ret(tx + 6 * s, ty + 6 * s + (th - 12 * s) * (1 - nv), tw - 12 * s, (th - 12 * s) * nv, nv > 0.6 ? '#2ea043aa' : '#1f6febaa');
-    ret(tx + tw * 0.45, ty - 30 * s, 8 * s, 30 * s, '#3a4856');
-    // semáforo
-    var sx = W * 0.92, sy = base - 290 * s, f = (t / 1000) % 9;
-    ret(sx - 3 * s, sy + 90 * s, 6 * s, 200 * s, '#3a4856'); ret(sx - 18 * s, sy, 36 * s, 96 * s, '#11161c');
-    luz(sx, sy + 16 * s, 10 * s, '#ff4d4d', f >= 6); luz(sx, sy + 48 * s, 10 * s, '#ffcc00', f >= 4.5 && f < 6); luz(sx, sy + 80 * s, 10 * s, '#3fdc5a', f < 4.5);
-    // esteira
-    var ey = base - 20 * s, eh = 26 * s;
-    ret(x0, ey, x1 - x0, eh, '#20262d'); ret(x0, ey, x1 - x0, 4 * s, '#3a4856');
-    cx.strokeStyle = '#ffffff12'; var off = (t / 12) % (30 * s);
-    for (var xx = x0 + off; xx < x1; xx += 30 * s) { cx.beginPath(); cx.moveTo(xx, ey + 6 * s); cx.lineTo(xx, ey + eh); cx.stroke(); }
-    for (i = 0; i < 8; i++) ret(x0 + i * (x1 - x0) / 7.3, ey + eh, 8 * s, 60 * s, '#2b333c');
-    // sensor B1 (feixe acende quando a caixa passa)
-    var bx = x0 + (x1 - x0) * 0.55, det = false;
-    // caixas
-    for (i = 0; i < caixas.length; i++) {
-      if (!quieto) caixas[i] = (caixas[i] + 0.0009) % 1;
-      var px = x0 + (x1 - x0 + 120 * s) * caixas[i] - 120 * s, bw = 64 * s;
-      if (px + bw < x0 || px > x1) continue;
-      if (px < bx && px + bw > bx) det = true;
-      ret(px, ey - 54 * s, bw, 54 * s, '#b07a3c'); ret(px, ey - 54 * s, bw, 8 * s, '#c99050'); ret(px + bw * 0.42, ey - 54 * s, bw * 0.16, 54 * s, '#9a6a33');
-    }
-    ret(bx - 4 * s, ey - 110 * s, 8 * s, 50 * s, '#3a4856');
-    cx.strokeStyle = det ? '#ff5c5ccc' : '#ff5c5c33'; cx.lineWidth = 2 * s; cx.beginPath(); cx.moveTo(bx, ey - 62 * s); cx.lineTo(bx, ey - 2 * s); cx.stroke();
-    luz(bx, ey - 116 * s, 6 * s, '#ffcc00', det);
-    // painel com botões
-    var px2 = W * 0.6, py2 = base - 210 * s;
-    ret(px2, py2, 90 * s, 120 * s, '#d9dde1'); ret(px2 + 4 * s, py2 + 4 * s, 82 * s, 112 * s, '#c3c8cd');
-    luz(px2 + 25 * s, py2 + 30 * s, 9 * s, '#3fdc5a', true); luz(px2 + 65 * s, py2 + 30 * s, 9 * s, '#ff4d4d', false);
-    luz(px2 + 45 * s, py2 + 80 * s, 16 * s, '#e5322d', true); ret(px2 + 25 * s, py2 + 98 * s, 40 * s, 6 * s, '#ffcc00');
-  }
-  function loop() {
-    var agora = Date.now(), p = (agora - t0) / T;
-    if (p >= 1) { t0 = agora; k = (k + 1) % CENAS.length; trocaLegenda(); p = 0; }
-    if (lgBarra) lgBarra.style.width = (p * 100).toFixed(1) + '%';
-    quadro(agora);
-    if (!usandoVideo || leg) requestAnimationFrame(loop);
-  }
-  requestAnimationFrame(loop);
+  /* abrir o formulário direto por link: ...github.io/#comprar */
+  if (location.hash === '#comprar' && md) abreCompra();
+  window.SUSSAI_SITE = { abreCompra: abreCompra, pedido: pedido, mostra: mostra };
 })();
