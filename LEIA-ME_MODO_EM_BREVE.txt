@@ -1,0 +1,7 @@
+SITE SUSSAILAB - MODO "EM BREVE" (sem programas, sem venda)
+Suba TODOS estes arquivos no GitHub (substituindo). Funciona: login Google, tela dos 4 programas,
+paginas dos programas, loja de cenas (vitrine), "Seu video aqui", manuais.
+Botoes de baixar e de comprar mostram "Lancamento em breve" + "Quero ser avisado"
+(os nomes caem na aba "Interessados" da planilha).
+NO LANCAMENTO (depois do registro INPI): suba o 2de6_SITE_GITHUB normal (com SussaiLab.zip)
+e APAGUE do GitHub o arquivo embreve.js.

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es-419">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Su video aquí – SussaiLab</title>
+<meta name="description" content="Videos de profesores, alumnos y empresas usando SussaiLab. ¡Envíe su video y aparezca en el sitio!">
+<meta property="og:title" content="Su video aquí – SussaiLab">
+<meta property="og:image" content="https://sussailab.com.br/cena12.jpg">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://accounts.google.com/gsi/client; frame-src https://accounts.google.com/gsi/ https://www.youtube-nocookie.com https://player.vimeo.com; connect-src 'self' https://script.google.com https://script.googleusercontent.com https://accounts.google.com/gsi/; style-src 'self' 'unsafe-inline' https://accounts.google.com/gsi/style; img-src 'self' data: https:; media-src 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="stylesheet" href="estilo.css?v=66">
+<link rel="stylesheet" href="portal.css?v=66m">
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body class="portal" data-sl="videos">
+<header class="pt-topo"><a class="pt-marca" href="index-es.html">Sussai<b>Lab</b></a> <a href="index-es.html" style="color:#58a6ff">← Programas SussaiLab</a><span class="esp"></span><span class="sl-conta" id="slConta"></span><span class="lang"><a href="videos.html?lang=pt" hreflang="pt-BR">PT</a><a href="videos-en.html" hreflang="en">EN</a><a class="on" href="videos-es.html" hreflang="es-419">ES</a></span></header>
+<main class="vd-pag">
+  <section class="vd-hero">
+    <div><h1>🎥 Su video aquí</h1><p>Profesores, alumnos, escuelas y empresas mostrando <b>SussaiLab</b> en acción. ¿Grabó una clase, un desafío resuelto o un proyecto? <b>¡Envíe el enlace y aparezca aquí!</b></p><a class="btn grande" href="#enviar" style="background:#da3633">Quiero participar</a></div>
+    <div class="vd-num"><b id="vdTotal">–</b><span>videos publicados</span></div>
+  </section>
+  <section class="vd-pshare"><span>📣 Comparta esta página con sus alumnos y colegas:</span><div id="vdSharePag"></div></section>
+  <div class="vd-toast" id="vdToast" role="status" aria-live="polite"></div>
+  <div class="vd-filtro" id="vdFiltro"></div>
+  <section class="vd-grade" id="vdGrade"></section>
+  <section class="vd-env" id="enviar">
+    <div class="vd-box">
+      <h2>📤 Envíe su video</h2>
+      <p style="color:#9aa7b4;margin:0">Entre con su cuenta Google para enviar su video (evita spam – nunca publicamos su correo).</p>
+      <div id="vdBotao"></div>
+      <div class="vd-form" id="vdForm" hidden>
+        <label for="vLink">Enlace del video *</label><input type="url" id="vLink" maxlength="300" placeholder="https://www.youtube.com/watch?v=...">
+        <label for="vTitulo">Título *</label><input type="text" id="vTitulo" maxlength="100">
+        <div class="g2"><div><label for="vAutor">Su nombre o canal *</label><input type="text" id="vAutor" maxlength="80"></div>
+        <div><label for="vEscola">Escuela / empresa</label><input type="text" id="vEscola" maxlength="80"></div></div>
+        <label for="vCidade">Ciudad / Estado</label><input type="text" id="vCidade" maxlength="60">
+        <label for="vDesc">Sobre el video (opcional)</label><textarea id="vDesc" maxlength="400" rows="3"></textarea>
+        <label class="chk"><input type="checkbox" id="vOk"> <span>Autorizo a SussaiLab a mostrar este video (con mi nombre, escuela y ciudad) en el sitio y en las redes sociales de SussaiLab. Declaro que tengo derecho a divulgar el video.</span></label>
+        <button type="button" class="btn grande" id="vEnviar">📤 Enviar para aprobación</button>
+      </div>
+      <div class="ms" id="vdMsg"></div>
+    </div>
+    <div class="vd-box">
+      <h2>Cómo participar</h2><ol><li>Grabe usando SussaiLab (clase, desafío, escena, consejo, proyecto del grupo...).</li><li>Publíquelo en <b>YouTube, Instagram, TikTok, Facebook, LinkedIn o Vimeo</b> – use <b>#SussaiLab</b> y etiquete @sussailab.</li><li>Entre con su cuenta Google aquí y envíe el enlace.</li><li>Aprobado, el video aparece en esta página y usted recibe un correo. 🎉</li></ol>
+      <h2>💡 Consejos para un buen video</h2><ul><li>Muestre la pantalla del simulador y explique lo que hace.</li><li>Los videos cortos (1 a 5 min) son los más vistos.</li><li>Diga el nombre de su escuela, curso o empresa – ¡también lo divulgamos!</li><li>Nada de datos personales de alumnos menores sin autorización.</li></ul>
+    </div>
+  </section>
+</main>
+<footer class="pt-rod">© 2026 SussaiLab · contato.sussai@gmail.com · <a href="privacidade-es.html">Privacidad</a> · <a href="termos-es.html">Términos</a></footer>
+<script src="conta.js?v=66v"></script>
+<script src="videos.js?v=66v"></script>
+<script src="embreve.js?v=1"></script>
+</body>
+</html>

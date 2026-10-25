@@ -16,7 +16,7 @@
     var d = dadosDoLogin(resp.credential);
     if (!window.opener) { msg('Login feito como ' + (d.email || '?') + '. Para ativar, abra esta página pelo botão "Entrar com Google" do SUSSAI.', 'erro'); return; }
     window.opener.postMessage({ tipo: 'sussai-login', credencial: resp.credential, email: d.email || '', nome: d.name || '' }, '*');
-    msg('✔ Conectado como ' + (d.email || '') + '. Voltando ao SUSSAI…', 'ok');
+    msg('✔ Conectado como ' + (d.email || '') + '. Voltando ao SUSSAI CLP…', 'ok');
     setTimeout(function () { window.close(); }, 1500);
   }
   function iniciar() {

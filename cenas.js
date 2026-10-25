@@ -1,185 +1,78 @@
-/* gerado do próprio SUSSAI (nomes, descrições e legendas da capa) */
-var SUSSAI_CENAS = [
-{
-"n": "01",
-"ic": "📦",
-"nome": "Esteira simples (sensor + caixa)",
-"desc": "Uma esteira com dois sensores: B1 no início da esteira e B2 na boca do recipiente. A caixa em B1 liga a esteira; quando ela cai no recipiente e passa por B2, a esteira desliga. Uma caixa por vez.",
-"cap": "LIGA liga o sistema M01. A caixa no sensor B1 I03 liga a esteira Q01 com selo. No fim ela cai no recipiente e passa pela barreira B2 I04: o contato NF de I04 abre o selo e a esteira para. Uma caixa por vez.",
-"tit": "Esteira: liga no B1, desliga no B2",
-"teste": true,
-"ent": 6,
-"sai": 3,
-"prog": 4,
-"def": 6
-},
-{
-"n": "02",
-"ic": "🌀",
-"nome": "Ventilador industrial (partida direta)",
-"desc": "Monte a partida direta com selo, sinalização e relé térmico. Para fazer valendo NOTA, use o Modo Gamificação.",
-"cap": "Acompanhe a energia (verde): LIGA I01 energiza Q01 e o contato de selo Q01 mantém o motor ligado. DESLIGA I02 e o térmico FT1 I03 são NF no campo e ficam em série – apertando DESLIGA a linha abre e o motor para.",
-"tit": "Partida direta com selo e relé térmico",
-"teste": true,
-"ent": 4,
-"sai": 4,
-"prog": 3,
-"def": 2
-},
-{
-"n": "03",
-"ic": "🧪",
-"nome": "Tanque misturador (bomba + agitador)",
-"desc": "A bomba enche o tanque, o agitador (hélice) bate o líquido – depois de 5 s mexendo ele muda de cor – e o produto pronto sai pela válvula de saída.",
-"cap": "Ciclo automático: a bomba enche até o nível alto (LSH), o agitador mistura por 5 s – o líquido muda de azul para verde – e a válvula de saída descarrega o produto. Depois começa o próximo lote.",
-"tit": "",
-"teste": true,
-"ent": 7,
-"sai": 6,
-"prog": 4,
-"def": 7
-},
-{
-"n": "04",
-"ic": "🚸",
-"nome": "Semáforo de uma via (mão dupla) com travessia de pedestres",
-"desc": "Rua de mão dupla (vai e vem) com faixa de pedestres no meio da quadra. É um semáforo SOB DEMANDA: os carros ficam no VERDE o tempo todo e o semáforo só fecha quando um pedestre aperta a botoeira. Depois do verde mínimo, os dois semáforos dos carros vão juntos para o amarelo, fecham, e o boneco fica verde.",
-"cap": "M02 guarda o pedido da botoeira (selo); M03 só inicia o ciclo depois do verde mínimo T09. Cascata – o DN de um liga o próximo: T01 verde, T02 amarelo, T03 vermelho geral, T04 boneco verde, T05 mão piscando, T06 fim do ciclo.",
-"tit": "Semáforo sob demanda: temporizadores em cascata",
-"teste": false,
-"ent": 4,
-"sai": 6,
-"prog": 2,
-"def": 3
-},
-{
-"n": "05",
-"ic": "🚦",
-"nome": "Semáforo de duas vias com pedestres",
-"desc": "Cruzamento de duas ruas de mão única com dois semáforos e travessia de pedestres por botoeira. Se as duas vias abrirem juntas, há colisão!",
-"cap": "Cruzamento de duas ruas de mão única: verde → amarelo → vermelho geral, alternando as vias A e B – nunca abertas juntas. O pedestre aperta a botoeira e, no fim do ciclo, entra a travessia com boneco verde.",
-"tit": "",
-"teste": false,
-"ent": 5,
-"sai": 8,
-"prog": 3,
-"def": 4
-},
-{
-"n": "06",
-"ic": "✳",
-"nome": "Cruzamento de 4 vias (4 semáforos) com pedestres",
-"desc": "Duas avenidas de mão dupla: 4 semáforos de carros (A1/A2 ligados juntos na via A, B1/B2 na via B) e semáforos de pedestres com botoeiras nas 4 esquinas.",
-"cap": "Quatro semáforos em ciclo por temporizadores: verde → amarelo → vermelho geral, alternando as vias A e B. Quando um pedestre aperta a botoeira, entra a fase de pedestres com boneco verde e mão vermelha piscando.",
-"tit": "",
-"teste": false,
-"ent": 5,
-"sai": 8,
-"prog": 3,
-"def": 4
-},
-{
-"n": "07",
-"ic": "🚧",
-"nome": "Cancela / portão de estacionamento",
-"desc": "Cancela ARTICULADA (dois braços) numa ilha no meio da pista, alta o bastante para passar caminhão. O carro chega, o laço detecta, a cancela abre. Com carro embaixo ela não desce; depois que o carro passa, fecha. Os carros chegam com espaçamento aleatório.",
-"cap": "O carro no laço B1 I03 liga M02 e a cancela abre Q01 até o fim de curso FA I06. Aberta, T01 conta 5 s e o contato NF T01 derruba M02: a cancela fecha Q02 – mas nunca com carro embaixo (barreira B2 I04).",
-"tit": "Cancela com temporizador",
-"teste": false,
-"ent": 9,
-"sai": 5,
-"prog": 2,
-"def": 5
-},
-{
-"n": "08",
-"ic": "🍾",
-"nome": "Envase de garrafas (silo + válvula)",
-"desc": "A garrafa para embaixo do silo, a válvula abre e enche; o sensor de cheio fecha a válvula e a garrafa segue. Vem a próxima.",
-"cap": "A garrafa no bico (B1 I03) abre o contato NF da esteira Q01 e liga a válvula Y1 Q02. O sensor de cheio B2 I04 liga M02 com selo: a válvula fecha e a esteira leva a garrafa embora.",
-"tit": "Envase com sensor de posição e de cheio",
-"teste": false,
-"ent": 7,
-"sai": 5,
-"prog": 3,
-"def": 6
-},
-{
-"n": "09",
-"ic": "🏢",
-"nome": "Caixa d'água de prédio (bombas A/B)",
-"desc": "A cisterna do térreo manda água para a caixa do último andar pela bomba A ou B. Automático pela boia ou manual pelos botões.",
-"cap": "Modo AUTOMÁTICO: quando a boia da caixa do último andar pede água, a bomba escolhida (A ou B) recalca da cisterna. O eletrodo da cisterna protege a bomba contra trabalhar a seco; A e B são intertravadas.",
-"tit": "",
-"teste": false,
-"ent": 9,
-"sai": 5,
-"prog": 3,
-"def": 8
-},
-{
-"n": "10",
-"ic": "🔄",
-"nome": "Mesa giratória (separa por tamanho)",
-"desc": "Sensor B4 no fim da esteira segura a caixa até a mesa estar em 0° e livre. Na mesa, o sensor inferior vê que a caixa chegou e o superior vê se ela é alta. Alta → DIREITA, baixa → ESQUERDA.",
-"cap": "O sensor B4 segura a caixa no fim da esteira até a mesa estar em 0° e livre. Na mesa, o sensor inferior detecta a chegada e o superior a altura: caixa ALTA gira para a direita, caixa BAIXA para a esquerda.",
-"tit": "",
-"teste": false,
-"ent": 13,
-"sai": 6,
-"prog": 2,
-"def": 9
-},
-{
-"n": "11",
-"ic": "🛤",
-"nome": "4 esteiras em cascata (acúmulo) + operador",
-"desc": "Quatro esteiras em sequência; no fim um operador pega as caixas e empilha no palete. Se as caixas acumulam, as esteiras param em cascata (4 → 3 → 2 → 1) e voltam quando o operador libera a última.",
-"cap": "Quatro esteiras levam as caixas até o operador, que empilha no palete. Cada esteira só entrega a caixa se a seguinte estiver andando: com acúmulo, elas param em cascata (4 → 3 → 2 → 1) e voltam em sequência.",
-"tit": "",
-"teste": false,
-"ent": 11,
-"sai": 7,
-"prog": 3,
-"def": 8
-},
-{
-"n": "12",
-"ic": "🗜",
-"nome": "Prensa hidráulica – comando bimanual e cortina de luz (NR-12)",
-"desc": "A prensa só desce com as DUAS mãos nos botões do bimanual (ao mesmo tempo). A cortina de luz para a prensa se alguém colocar a mão na área de prensagem.",
-"cap": "T01 (0,5 s) mede a simultaneidade: M02 só liga se as DUAS mãos apertarem antes de T01. Com M02, M03 (segurança OK: cortina livre, emergência, REARME) e sem M04, Y1 desce; chegou em S3 ou soltou as mãos, Y2 sobe.",
-"tit": "Bimanual com simultaneidade (NR-12)",
-"teste": false,
-"ent": 10,
-"sai": 7,
-"prog": 3,
-"def": 4
-},
-{
-"n": "13",
-"ic": "🏭",
-"nome": "Esteira com separação (avançado)",
-"desc": "Linha completa: alimentador pneumático, sensores, desviador, quadro elétrico, emergência NR-12 e relé térmico.",
-"cap": "Seletora em AUTO + LIGA: o alimentador pneumático empurra uma caixa a cada 3,5 s, o sensor B4 identifica as caixas ALTAS e o desviador as separa; o contador fecha o lote de 10 caixas. Emergência NR-12 e relé térmico.",
-"tit": "",
-"teste": false,
-"ent": 15,
-"sai": 8,
-"prog": 4,
-"def": 14
-},
-{
-"n": "14",
-"ic": "🛗",
-"nome": "Elevador de pessoas (4 andares)",
-"desc": "Elevador com térreo + 3 andares: chamadas com registro, sensores de andar, porta automática com cortina de luz, máquina de tração com relé térmico. Aperte um botão de chamada: VOCÊ aparece no andar, entra na cabine e escolhe para qual andar quer ir.",
-"cap": "Térreo + 3 andares com passageiros: cada chamada acende a lâmpada de registro, a cabine guarda o sentido (subindo/descendo) até atender as chamadas e só anda com a porta fechada. Cortina de luz protege a porta.",
-"tit": "",
-"teste": false,
-"ent": 13,
-"sai": 8,
-"prog": 2,
-"def": 4
-}
-];
+/* SussaiLab – 🛒 LOJA DE CENAS EXTRAS do site (rev66u)
+   • Todos VEEM a vitrine (foto, nome, descrição) – a lista vem ao vivo da planilha.
+   • BAIXAR: entrar com a conta Google + ter licença PAGA válida do SussaiLab CLP.
+   • O arquivo baixado vem criptografado e preso ao e-mail – só abre no SussaiLab CLP dessa conta. */
+(function () {
+  'use strict';
+  var SRV = 'https://script.google.com/macros/s/AKfycbzUmiNAeX4wbS7guwxjm8zCPOKOhLBbbenZhcpfXmEKk3cpC1--naS5TjsgfWDqY3ggTw/exec', CID = '15890667708-hnm6mo385c0j1ud8om40glo2mf7mor05.apps.googleusercontent.com', TX = {"pt": {"title": "Cenas extras – SussaiLab CLP", "desc": "Loja de cenas extras do SussaiLab CLP: máquinas novas para programar. Veja todas; baixar é exclusivo da licença paga.", "h1": "🛒 Cenas extras do SussaiLab CLP", "sub": "Máquinas novas para você programar em Ladder, publicadas sempre. <b>Veja todas à vontade</b> – para <b>baixar</b>, entre com a sua conta Google: o download é exclusivo de quem tem <b>licença paga válida</b>.", "total": "cenas publicadas", "comoH": "Como instalar uma cena", "segH": "🔐 Cenas protegidas", "seg": "Cada cena baixada vem <b>criptografada (AES-256)</b>, <b>assinada</b> e <b>presa ao seu e-mail</b>: abre só no SussaiLab CLP da sua conta e funciona enquanto a licença estiver em dia. Não adianta copiar para outra pessoa.", "statusIni": "Entre com a sua conta Google para baixar as cenas.", "conferindo": "Conferindo a sua licença...", "podeOk": "Conta %E com licença <b>%P</b> – pode baixar todas as cenas.", "verPlanos": "Ver planos e comprar", "btLogin": "Entre para baixar", "btBaixar": "Baixar cena", "btPaga": "Licença paga para baixar", "nova": "NOVA", "todas": "Todas", "vazio": "Nenhuma cena extra publicada ainda – volte em breve!", "nadaFiltro": "Nenhuma cena neste assunto.", "carregando": "Carregando as cenas...", "semNet": "Sem conexão com o servidor. Tente de novo.", "semGoogle": "Não foi possível carregar o login do Google.", "baixando": "Baixando...", "relogar": "Sua sessão do Google expirou – entre de novo.", "erro": "Não foi possível baixar agora.", "baixou": "Baixado: %A – no SussaiLab CLP use Cena ▸ ➕ Adicionar cena nova (.cena).", "nav": "🛒 Cenas extras", "dl": "🛒 Cenas extras (loja)"}, "en": {"title": "Extra scenes – SussaiLab CLP", "desc": "SussaiLab CLP extra scenes store: new machines to program. Browse them all; downloading is exclusive to the paid license.", "h1": "🛒 SussaiLab CLP extra scenes", "sub": "New machines for you to program in Ladder, published regularly. <b>Browse them all freely</b> – to <b>download</b>, sign in with your Google account: downloads are exclusive to a <b>valid paid license</b>.", "total": "scenes published", "comoH": "How to install a scene", "segH": "🔐 Protected scenes", "seg": "Each downloaded scene is <b>encrypted (AES-256)</b>, <b>signed</b> and <b>tied to your e-mail</b>: it only opens in the SussaiLab CLP of your account and works while your license is valid. Copying it to someone else does not work.", "statusIni": "Sign in with your Google account to download scenes.", "conferindo": "Checking your license...", "podeOk": "Account %E with <b>%P</b> license – you can download all scenes.", "verPlanos": "See plans and buy", "btLogin": "Sign in to download", "btBaixar": "Download scene", "btPaga": "Paid license to download", "nova": "NEW", "todas": "All", "vazio": "No extra scenes published yet – come back soon!", "nadaFiltro": "No scenes in this subject.", "carregando": "Loading scenes...", "semNet": "No connection to the server. Try again.", "semGoogle": "Could not load Google sign-in.", "baixando": "Downloading...", "relogar": "Your Google session expired – sign in again.", "erro": "Could not download now.", "baixou": "Downloaded: %A – in SussaiLab CLP use Scene ▸ ➕ Add new scene (.cena).", "nav": "🛒 Extra scenes", "dl": "🛒 Extra scenes (store)"}, "es": {"title": "Escenas extra – SussaiLab CLP", "desc": "Tienda de escenas extra de SussaiLab CLP: máquinas nuevas para programar. Véalas todas; descargar es exclusivo de la licencia paga.", "h1": "🛒 Escenas extra de SussaiLab CLP", "sub": "Máquinas nuevas para programar en Ladder, publicadas siempre. <b>Véalas todas libremente</b> – para <b>descargar</b>, entre con su cuenta Google: la descarga es exclusiva de quien tiene <b>licencia paga vigente</b>.", "total": "escenas publicadas", "comoH": "Cómo instalar una escena", "segH": "🔐 Escenas protegidas", "seg": "Cada escena descargada viene <b>cifrada (AES-256)</b>, <b>firmada</b> y <b>vinculada a su correo</b>: abre solo en el SussaiLab CLP de su cuenta y funciona mientras la licencia esté vigente. Copiarla a otra persona no funciona.", "statusIni": "Entre con su cuenta Google para descargar las escenas.", "conferindo": "Verificando su licencia...", "podeOk": "Cuenta %E con licencia <b>%P</b> – puede descargar todas las escenas.", "verPlanos": "Ver planes y comprar", "btLogin": "Entre para descargar", "btBaixar": "Descargar escena", "btPaga": "Licencia paga para descargar", "nova": "NUEVA", "todas": "Todas", "vazio": "Aún no hay escenas extra publicadas – ¡vuelva pronto!", "nadaFiltro": "No hay escenas en este tema.", "carregando": "Cargando escenas...", "semNet": "Sin conexión con el servidor. Intente de nuevo.", "semGoogle": "No fue posible cargar el inicio de sesión de Google.", "baixando": "Descargando...", "relogar": "Su sesión de Google expiró – entre de nuevo.", "erro": "No fue posible descargar ahora.", "baixou": "Descargado: %A – en SussaiLab CLP use Escena ▸ ➕ Agregar escena nueva (.cena).", "nav": "🛒 Escenas extra", "dl": "🛒 Escenas extra (tienda)"}};
+  var LG = String(document.documentElement.lang || 'pt').slice(0, 2).toLowerCase(); if (!TX[LG]) LG = 'pt';
+  var X = TX[LG], SUF = LG === 'pt' ? '' : '-' + LG;
+  var cred = null, pode = null, LISTA = [], filtro = '';
+  function $(id) { return document.getElementById(id); }
+  function esc(t) { return String(t == null ? '' : t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function post(q) { q.lang = LG; return fetch(SRV, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(q), redirect: 'follow' }).then(function (r) { return r.json(); }); }
+  function status(html, cls) { var e = $('cnStatus'); e.innerHTML = html; e.className = 'cn-status ' + (cls || ''); }
+  function fotoOk(f) { return /^data:image\/(jpeg|png|webp);base64,[A-Za-z0-9+\/=]+$/.test(f || '') ? f : ''; }
+  function render() {
+    var G = $('cnGrade'), novo = Date.now() - 30 * 864e5;
+    var L = LISTA.filter(function (c) { return !filtro || c.assunto === filtro; });
+    if (!LISTA.length) { G.innerHTML = '<div class="cn-vazio">' + X.vazio + '</div>'; return; }
+    G.innerHTML = L.map(function (c) {
+      var i = LISTA.indexOf(c), f = fotoOk(c.foto);
+      var bt = !cred ? '<button class="cn-bt lk" data-i="' + i + '" data-a="login">🔐 ' + X.btLogin + '</button>'
+        : pode && pode.ok ? '<button class="cn-bt" data-i="' + i + '" data-a="baixar">⬇ ' + X.btBaixar + '</button>'
+        : '<a class="cn-bt lk" href="clp' + SUF + '.html#planos">🔒 ' + X.btPaga + '</a>';
+      return '<article class="cn-card"><div class="cn-foto"' + (f ? ' style="background-image:url(' + f + ')"' : '') + '>' + (f ? '' : '🧩') +
+        (c.data > novo ? '<span class="cn-nova">' + X.nova + '</span>' : '') + '<span class="cn-cad">🔒</span></div>' +
+        '<div class="cn-corpo"><h3>' + esc(c.nome) + '</h3><div class="cn-tags">' + [c.assunto, c.nivel, c.es, 'v' + c.versao].filter(Boolean).map(function (t) { return '<span>' + esc(t) + '</span>'; }).join('') +
+        '</div><p>' + esc(c.desc) + '</p>' + bt + '<div class="cn-ms" id="cnMs' + i + '"></div></div></article>';
+    }).join('') || '<div class="cn-vazio">' + X.nadaFiltro + '</div>';
+    var as = {}; LISTA.forEach(function (c) { if (c.assunto) as[c.assunto] = 1; });
+    $('cnFiltro').innerHTML = '<button class="' + (filtro ? '' : 'on') + '" data-f="">' + X.todas + ' (' + LISTA.length + ')</button>' +
+      Object.keys(as).sort().map(function (a) { return '<button class="' + (filtro === a ? 'on' : '') + '" data-f="' + esc(a) + '">' + esc(a) + '</button>'; }).join('');
+  }
+  function carregar() {
+    $('cnGrade').innerHTML = '<div class="cn-vazio">⏳ ' + X.carregando + '</div>';
+    post({ acao: 'cenas_lista' }).then(function (r) { LISTA = (r && r.cenas) || []; $('cnTotal').textContent = LISTA.length; render(); },
+      function () { $('cnGrade').innerHTML = '<div class="cn-vazio">⚠ ' + X.semNet + '</div>'; });
+  }
+  function aoEntrar(resp) {
+    cred = resp.credential; status('⏳ ' + X.conferindo);
+    post({ acao: 'cena_pode', loginGoogle: cred }).then(function (r) {
+      pode = r || { ok: false };
+      if (pode.relogar) { cred = null; status('⚠ ' + esc(pode.msg), 'er'); render(); return; }
+      $('cnBotao').hidden = true;
+      if (pode.ok) status('✔ ' + X.podeOk.replace('%E', '<b>' + esc(pode.email) + '</b>').replace('%P', esc(pode.plano || '')), 'ok');
+      else status('🔒 <b>' + esc(pode.email || '') + '</b>: ' + esc(pode.msg || '') + ' <a href="clp' + SUF + '.html#planos">' + X.verPlanos + '</a>', 'no');
+      render();
+    }, function () { status('⚠ ' + X.semNet, 'er'); });
+  }
+  function salvar(nome, texto) {
+    var b = new Blob([texto], { type: 'application/octet-stream' }), u = URL.createObjectURL(b), a = document.createElement('a');
+    a.href = u; a.download = nome; document.body.appendChild(a); a.click(); a.remove(); setTimeout(function () { URL.revokeObjectURL(u); }, 4000);
+  }
+  function baixar(i, b) {
+    var c = LISTA[i], m = $('cnMs' + i); b.disabled = true; m.textContent = '⏳ ' + X.baixando; m.className = 'cn-ms';
+    post({ acao: 'cena_site', loginGoogle: cred, id: c.id }).then(function (r) {
+      b.disabled = false;
+      if (r && r.relogar) { cred = null; pode = null; $('cnBotao').hidden = false; status('🔐 ' + X.relogar, 'no'); render(); return; }
+      if (!r || !r.ok) { m.textContent = '⚠ ' + ((r && r.msg) || X.erro); m.className = 'cn-ms er'; return; }
+      salvar(r.arquivo, JSON.stringify(r.cena)); m.innerHTML = '✔ ' + X.baixou.replace('%A', '<b>' + esc(r.arquivo) + '</b>'); m.className = 'cn-ms ok';
+    }, function () { b.disabled = false; m.textContent = '⚠ ' + X.semNet; m.className = 'cn-ms er'; });
+  }
+  document.addEventListener('click', function (e) {
+    var t = e.target && e.target.closest ? e.target.closest('[data-a],[data-f]') : null; if (!t) return;
+    if (t.hasAttribute('data-f')) { filtro = t.getAttribute('data-f'); render(); return; }
+    var a = t.getAttribute('data-a'), i = +t.getAttribute('data-i');
+    if (a === 'login') { $('cnLogin').scrollIntoView({ behavior: 'smooth', block: 'center' }); try { google.accounts.id.prompt(); } catch (x) { } return; }
+    if (a === 'baixar') baixar(i, t);
+  });
+  function iniciar(n) {
+    if (!window.google || !google.accounts || !google.accounts.id) { if ((n || 0) < 100) setTimeout(function () { iniciar((n || 0) + 1); }, 200); else status('⚠ ' + X.semGoogle, 'er'); return; }
+    google.accounts.id.initialize({ client_id: CID, callback: aoEntrar, auto_select: true, cancel_on_tap_outside: true });
+    google.accounts.id.renderButton($('cnBotao'), { theme: 'filled_blue', size: 'large', text: 'signin_with', shape: 'pill', locale: { pt: 'pt-BR', en: 'en', es: 'es-419' }[LG] });
+  }
+  status('🔐 ' + X.statusIni);
+  carregar(); iniciar(0);
+  window.SussaiCenas = { aoEntrar: aoEntrar, carregar: carregar, estado: function () { return { cred: cred, pode: pode, LISTA: LISTA }; } };
+})();

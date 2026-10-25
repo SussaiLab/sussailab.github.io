@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>SUSSAI CLP</title>
+<link rel="stylesheet" href="estilo.css?v=66">
+<style>body{display:flex;min-height:100vh;align-items:center;justify-content:center;padding:16px}
+.box{background:#161d25;border:1px solid #30363d;border-radius:14px;padding:26px 28px;width:min(620px,96vw)}
+h1{font-size:22px;margin:6px 0 10px}.ok{color:#56d364}.er{color:#ff7b72}ol{line-height:1.7}
+.btn{display:inline-block;background:#1f883d;color:#fff;border-radius:10px;padding:12px 20px;font-weight:700;text-decoration:none;margin:10px 0}
+.sp{display:inline-block;width:18px;height:18px;border:3px solid #30363d;border-top-color:#58a6ff;border-radius:50%;animation:g 1s linear infinite;vertical-align:-3px;margin-right:6px}@keyframes g{to{transform:rotate(360deg)}}</style>
+</head>
+<body>
+<div class="box"><a class="logo" href="index.html" id="lgo">SUSSAI CLP</a><div id="c"><p><span class="sp"></span></p></div><p><a id="volta" href="index.html"></a></p></div>
+<script>
+(function () {
+  'use strict';
+  var OB = {"pt": {"t": "Pagamento – SUSSAI CLP", "esp": "⏳ Confirmando o seu pagamento…", "espP": "O Pix costuma confirmar em segundos; cartão, em até 2 minutos. Esta página atualiza sozinha.", "ok": "✔ Pagamento aprovado! Sua licença está liberada.", "okP": "Plano <b>%P</b> para a conta Google <b>%E</b>. Enviamos também um e-mail com o link.", "passos": ["Ainda não tem o SussaiLab? Baixe no botão abaixo.", "Descompacte (botão direito ▸ Extrair tudo) e abra o <b>SussaiLab.exe</b>.", "Clique em <b>Entrar com Google</b> com a conta <b>%E</b>. Clique em <b>SussaiLab CLP ▸ Abrir</b>.", "Já usa o SussaiLab? Ele atualiza sozinho em alguns minutos."], "bt": "⬇ Baixar o SussaiLab", "falhou": "✖ O pagamento não foi concluído.", "falhouP": "Nenhum valor foi cobrado. Você pode tentar de novo com Pix ou outro cartão.", "tentar": "Tentar de novo", "semPed": "Pedido não encontrado. Se você pagou, confira o e-mail de confirmação ou fale com contato.sussai@gmail.com.", "volta": "← Voltar ao site", "home": "clp.html"}, "en": {"t": "Payment – SUSSAI CLP", "esp": "⏳ Confirming your payment…", "espP": "Pix usually confirms in seconds; card, in up to 2 minutes. This page updates by itself.", "ok": "✔ Payment approved! Your license is released.", "okP": "Plan <b>%P</b> for the Google account <b>%E</b>. We also sent you an e-mail with the link.", "passos": ["Don't have SussaiLab yet? Download it with the button below.", "Unzip it (right click ▸ Extract all) and open <b>SussaiLab.exe</b>.", "Click <b>Sign in with Google</b> with the account <b>%E</b>. Click <b>SussaiLab CLP ▸ Open</b>.", "Already using SussaiLab? It updates by itself within a few minutes."], "bt": "⬇ Download SussaiLab", "falhou": "✖ The payment was not completed.", "falhouP": "Nothing was charged. You can try again with Pix or another card.", "tentar": "Try again", "semPed": "Order not found. If you paid, check the confirmation e-mail or write to contato.sussai@gmail.com.", "volta": "← Back to the site", "home": "clp-en.html"}, "es": {"t": "Pago – SUSSAI CLP", "esp": "⏳ Confirmando su pago…", "espP": "El Pix suele confirmarse en segundos; la tarjeta, en hasta 2 minutos. Esta página se actualiza sola.", "ok": "✔ ¡Pago aprobado! Su licencia está liberada.", "okP": "Plan <b>%P</b> para la cuenta Google <b>%E</b>. También le enviamos un correo con el enlace.", "passos": ["¿Todavía no tiene SussaiLab? Descárguelo con el botón de abajo.", "Descomprima (clic derecho ▸ Extraer todo) y abra <b>SussaiLab.exe</b>.", "Haga clic en <b>Entrar con Google</b> con la cuenta <b>%E</b>. Haga clic en <b>SussaiLab CLP ▸ Abrir</b>.", "¿Ya usa SussaiLab? Se actualiza solo en pocos minutos."], "bt": "⬇ Descargar SussaiLab", "falhou": "✖ El pago no se completó.", "falhouP": "No se cobró nada. Puede intentar de nuevo con Pix u otra tarjeta.", "tentar": "Intentar de nuevo", "semPed": "Pedido no encontrado. Si pagó, revise el correo de confirmación o escriba a contato.sussai@gmail.com.", "volta": "← Volver al sitio", "home": "clp-es.html"}}, SRV = 'https://script.google.com/macros/s/AKfycbzUmiNAeX4wbS7guwxjm8zCPOKOhLBbbenZhcpfXmEKk3cpC1--naS5TjsgfWDqY3ggTw/exec';
+  var q = {}; location.search.replace(/[?&]([^=&]+)=([^&]*)/g, function (m, k, v) { q[k] = decodeURIComponent(v); });
+  var lg = OB[q.lang] ? q.lang : (/^(en|es)/.test(navigator.language || '') ? navigator.language.slice(0, 2) : 'pt');
+  var X = OB[lg], c = document.getElementById('c');
+  document.documentElement.lang = lg === 'pt' ? 'pt-BR' : lg === 'en' ? 'en' : 'es-419'; document.title = X.t;
+  var v = document.getElementById('volta'); v.textContent = X.volta; v.href = X.home; document.getElementById('lgo').href = X.home;
+  var esc = function (t) { return String(t == null ? '' : t).replace(/[&<>"]/g, function (ch) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[ch]; }); };
+  var ped = q.pedido || ''; if (!ped) try { ped = (JSON.parse(localStorage.getItem('sussai.ultpedido') || '{}') || {}).pedido || ''; } catch (e) { }
+  function pago(r) {
+    var em = esc(r.email || '');
+    c.innerHTML = '<h1 class="ok">' + X.ok + '</h1><p>' + X.okP.replace('%P', esc(r.plano)).replace('%E', em) + '</p><ol>' + X.passos.map(function (p) { return '<li>' + p.replace('%E', em) + '</li>'; }).join('') + '</ol>' +
+      '<a class="btn" href="' + esc(r.download || 'SussaiLab.zip') + '" download>' + X.bt + '</a>';
+  }
+  function falhou() { c.innerHTML = '<h1 class="er">' + X.falhou + '</h1><p>' + X.falhouP + '</p><a class="btn" href="' + X.home + '#planos">' + X.tentar + '</a>'; }
+  function espera() { c.innerHTML = '<h1><span class="sp"></span>' + X.esp + '</h1><p>' + X.espP + '</p>'; }
+  if (!ped) { c.innerHTML = '<p class="er">' + X.semPed + '</p>'; return; }
+  if (q.pg === 'falhou') { falhou(); return; }
+  espera();
+  var n = 0;
+  function passo() {
+    fetch(SRV, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ acao: 'pedido', pedido: ped }), redirect: 'follow' })
+      .then(function (r) { return r.json(); }).then(function (r) {
+        if (r && r.pago) return pago(r);
+        if (r && (r.situacao === 'recusado' || r.situacao === 'estornado')) return falhou();
+        if (r && r.ok === false) { c.innerHTML = '<p class="er">' + X.semPed + '</p>'; return; }
+        if (++n < 120) setTimeout(passo, n < 24 ? 5000 : 15000);
+      }, function () { if (++n < 120) setTimeout(passo, 8000); });
+  }
+  passo();
+})();
+</script>
+<script src="embreve.js?v=1"></script>
+</body>
+</html>
