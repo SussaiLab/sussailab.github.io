@@ -6,9 +6,9 @@
   'use strict';
   var LG = String(document.documentElement.lang || 'pt').slice(0, 2).toLowerCase();
   var T = {
-    pt: { bt: '🚀 Lançamento em breve', h: '🚀 Lançamento em breve!', p: 'O <b>SussaiLab CLP</b> está na reta final (registro do software no INPI). Os downloads e as licenças serão liberados em poucos dias.', av: '🔔 Quero ser avisado', ok: '✔ Pronto! Você recebe um e-mail no lançamento.', ja: '✔ Você já está na lista – avisaremos no lançamento.', login: 'Entre com a sua conta Google para ser avisado:', entrar: 'Entrar', fechar: 'Fechar', err: 'Não foi possível agora. Tente de novo.', faixa: '🚀 <b>Lançamento em breve</b> – conheça tudo, crie sua conta e seja avisado. Downloads e licenças liberados em poucos dias.' },
-    en: { bt: '🚀 Launching soon', h: '🚀 Launching soon!', p: '<b>SussaiLab CLP</b> is in the final stretch (software registration). Downloads and licenses will be released in a few days.', av: '🔔 Notify me', ok: '✔ Done! You will get an e-mail at launch.', ja: '✔ You are already on the list – we will let you know.', login: 'Sign in with your Google account to be notified:', entrar: 'Sign in', fechar: 'Close', err: 'Could not do it now. Try again.', faixa: '🚀 <b>Launching soon</b> – explore everything, create your account and get notified. Downloads and licenses in a few days.' },
-    es: { bt: '🚀 Lanzamiento pronto', h: '🚀 ¡Lanzamiento pronto!', p: '<b>SussaiLab CLP</b> está en la recta final (registro del software). Las descargas y licencias se liberarán en pocos días.', av: '🔔 Quiero que me avisen', ok: '✔ ¡Listo! Recibirá un correo en el lanzamiento.', ja: '✔ Ya está en la lista – le avisaremos.', login: 'Entre con su cuenta Google para recibir el aviso:', entrar: 'Entrar', fechar: 'Cerrar', err: 'No fue posible ahora. Intente de nuevo.', faixa: '🚀 <b>Lanzamiento pronto</b> – conozca todo, cree su cuenta y reciba el aviso. Descargas y licencias en pocos días.' }
+    pt: { bt: '🚀 Lançamento em breve', h: '🚀 Lançamento em breve!', p: 'O <b>SussaiLab CLP</b> está na reta final (registro do software no INPI). Os downloads e as licenças serão liberados em poucos dias.', av: '🔔 Quero ser avisado', ok: '✔ Pronto! Você recebe um e-mail no lançamento.', ja: '✔ Você já está na lista – avisaremos no lançamento.', login: 'Entre com a sua conta Google para ser avisado:', entrar: 'Entrar', fechar: 'Fechar', err: 'Não foi possível agora. Tente de novo.', faixa: '🚀 <b>Lançamento em breve</b> – conheça tudo e seja avisado. Downloads e licenças liberados em poucos dias.' },
+    en: { bt: '🚀 Launching soon', h: '🚀 Launching soon!', p: '<b>SussaiLab CLP</b> is in the final stretch (software registration). Downloads and licenses will be released in a few days.', av: '🔔 Notify me', ok: '✔ Done! You will get an e-mail at launch.', ja: '✔ You are already on the list – we will let you know.', login: 'Sign in with your Google account to be notified:', entrar: 'Sign in', fechar: 'Close', err: 'Could not do it now. Try again.', faixa: '🚀 <b>Launching soon</b> – explore everything and get notified. Downloads and licenses in a few days.' },
+    es: { bt: '🚀 Lanzamiento pronto', h: '🚀 ¡Lanzamiento pronto!', p: '<b>SussaiLab CLP</b> está en la recta final (registro del software). Las descargas y licencias se liberarán en pocos días.', av: '🔔 Quiero que me avisen', ok: '✔ ¡Listo! Recibirá un correo en el lanzamiento.', ja: '✔ Ya está en la lista – le avisaremos.', login: 'Entre con su cuenta Google para recibir el aviso:', entrar: 'Entrar', fechar: 'Cerrar', err: 'No fue posible ahora. Intente de nuevo.', faixa: '🚀 <b>Lanzamiento pronto</b> – conozca todo y reciba el aviso. Descargas y licencias en pocos días.' }
   }[LG] || null;
   var X = T || { bt: '🚀 Em breve', h: '🚀 Em breve', p: '', av: '🔔', ok: '✔', ja: '✔', login: '', entrar: 'Entrar', fechar: 'Fechar', err: '!', faixa: '🚀' };
   var SUF = LG === 'en' ? '-en' : LG === 'es' ? '-es' : '';
@@ -31,11 +31,13 @@
     var c = window.SussaiConta && SussaiConta.conta ? SussaiConta.conta() : null;
     var d = document.createElement('div'); d.id = 'ebModal';
     d.innerHTML = '<div class="bx" role="dialog"><h2>' + X.h + '</h2><p>' + X.p + '</p>' +
-      (c ? '<button class="av" id="ebAv">' + X.av + '</button>' : '<p style="font-size:13px">' + X.login + '</p><a class="b av" href="index' + SUF + '.html?volta=' + encodeURIComponent((location.pathname.split('/').pop() || 'index.html')) + '">' + X.entrar + '</a>') +
+      (c ? '<button class="av" id="ebAv">' + X.av + '</button>' : '<p style="font-size:13px">' + X.login + '</p><button class="av" id="ebEntrar">' + X.entrar + '</button>') +
       '<button class="fe" id="ebFe">' + X.fechar + '</button><div class="ms" id="ebMs"></div></div>';
     document.body.appendChild(d);
     d.addEventListener('click', function (e) { if (e.target === d) fechar(); });
     document.getElementById('ebFe').onclick = fechar;
+    var en = document.getElementById('ebEntrar');
+    if (en) en.onclick = function () { fechar(); SussaiConta.entrar(modal); };
     var av = document.getElementById('ebAv');
     if (av) av.onclick = function () {
       av.disabled = true;
