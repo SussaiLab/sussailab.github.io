@@ -81,20 +81,21 @@
   <form class="caixa" id="fCompra" novalidate onsubmit="return false">
     <button type="button" class="fechar" id="cX" aria-label="Close">✕</button>
     <h3>🛒 Buy a SussaiLab CLP license</h3>
-    <p class="muted pequeno">Secure payment at <b>Mercado Pago</b>. The license is tied to the <b>Google e-mail</b> you enter – you sign in to the program with it. Prices in Brazilian reais (R$).</p>
+    <p class="muted pequeno">Secure payment at <b>Mercado Pago</b>. The license is tied to the <b>Google account you are signed in with</b> – you use it to sign in to the program. Prices in Brazilian reais (R$).</p>
     <label>Plan<select id="cPlano"><option value="anual">⭐ Annual (1 year) – 2 computers</option><option value="semestral">Semiannual (6 months) – 2 computers</option><option value="mensal">Monthly (1 month) – 2 computers</option><option value="escola">Group (1 year) – 20 computers</option></select></label>
     <div class="col2"><label>Full name *<input id="cNome" autocomplete="name"></label>
-      <label>Google e-mail you will use in SussaiLab CLP *<input id="cEmail" type="email" autocomplete="email" placeholder="seunome@gmail.com"></label></div>
+      <label>License Google account<span style="display:flex;gap:8px;align-items:center"><input id="cEmail" type="email" readonly tabindex="-1" aria-readonly="true" title="License Google account" style="flex:1;opacity:.85;cursor:not-allowed;background:#0d1117"><a href="#" id="cTroca" style="white-space:nowrap;font-size:13px">Switch account</a></span></label></div>
     <div class="col2"><label>Mobile / WhatsApp with area code *<input id="cFone" type="tel" autocomplete="tel" placeholder="(11) 98765-4321"></label>
       <div id="cGrupo" hidden><label>School / company *<input id="cInst" autocomplete="organization"></label></div></div>
     <label class="chk"><input type="checkbox" id="cOk"> I have read and accept the <a href="termos-en.html" target="_blank">Terms of use</a> and the <a href="privacidade-en.html" target="_blank">Privacy policy</a>.</label>
+    <div id="cVai" style="margin:8px 0;padding:8px 12px;border:1px solid #2ea043;border-radius:8px;background:rgba(46,160,67,.12);font-size:14px"></div>
     <div class="ms" id="cMsg"></div>
     <div class="pagar"><button type="button" class="btn pix" id="cqp">⚡ Pix</button><button type="button" class="btn" id="cqc">💳</button></div>
     <p class="muted pequeno">After paying you come back to this site and see the confirmation. The e-mail with the SussaiLab link arrives in moments.</p>
     <p class="muted pequeno">Prefer bank transfer or a school purchase order? <a href="#" id="cMan">Send the order by e-mail</a> (manual release).</p>
   </form>
 </div>
-<script src="conta.js?v=66z"></script>
-<script src="home.js?v=66m"></script>
+<script src="conta.js?v=rev09"></script>
+<script src="home.js?v=rev09"></script>
 </body>
 </html>

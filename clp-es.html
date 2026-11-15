@@ -81,20 +81,21 @@
   <form class="caixa" id="fCompra" novalidate onsubmit="return false">
     <button type="button" class="fechar" id="cX" aria-label="Cerrar">✕</button>
     <h3>🛒 Comprar licencia de SussaiLab CLP</h3>
-    <p class="muted pequeno">Pago seguro en <b>Mercado Pago</b>. La licencia queda vinculada al <b>correo Google</b> informado – con él usted entra al programa. Precios en reales (R$).</p>
+    <p class="muted pequeno">Pago seguro en <b>Mercado Pago</b>. La licencia queda vinculada a la <b>cuenta Google con la que inició sesión</b> – con ella usted entra al programa. Precios en reales (R$).</p>
     <label>Plan<select id="cPlano"><option value="anual">⭐ Anual (1 año) – 2 computadoras</option><option value="semestral">Semestral (6 meses) – 2 computadoras</option><option value="mensal">Mensual (1 mes) – 2 computadoras</option><option value="escola">Colectiva (1 año) – 20 computadoras</option></select></label>
     <div class="col2"><label>Nombre completo *<input id="cNome" autocomplete="name"></label>
-      <label>Correo Google que usará en SussaiLab CLP *<input id="cEmail" type="email" autocomplete="email" placeholder="seunome@gmail.com"></label></div>
+      <label>Cuenta Google de la licencia<span style="display:flex;gap:8px;align-items:center"><input id="cEmail" type="email" readonly tabindex="-1" aria-readonly="true" title="Cuenta Google de la licencia" style="flex:1;opacity:.85;cursor:not-allowed;background:#0d1117"><a href="#" id="cTroca" style="white-space:nowrap;font-size:13px">Cambiar cuenta</a></span></label></div>
     <div class="col2"><label>Celular / WhatsApp con código de área *<input id="cFone" type="tel" autocomplete="tel" placeholder="(11) 98765-4321"></label>
       <div id="cGrupo" hidden><label>Escuela / empresa *<input id="cInst" autocomplete="organization"></label></div></div>
     <label class="chk"><input type="checkbox" id="cOk"> Leí y acepto los <a href="termos-es.html" target="_blank">Términos de uso</a> y la <a href="privacidade-es.html" target="_blank">Política de privacidad</a>.</label>
+    <div id="cVai" style="margin:8px 0;padding:8px 12px;border:1px solid #2ea043;border-radius:8px;background:rgba(46,160,67,.12);font-size:14px"></div>
     <div class="ms" id="cMsg"></div>
     <div class="pagar"><button type="button" class="btn pix" id="cqp">⚡ Pix</button><button type="button" class="btn" id="cqc">💳</button></div>
     <p class="muted pequeno">Después de pagar usted vuelve a este sitio y ve la confirmación. El correo con el enlace de SussaiLab llega en instantes.</p>
     <p class="muted pequeno">¿Prefiere transferencia u orden de compra? <a href="#" id="cMan">Enviar el pedido por correo</a> (liberación manual).</p>
   </form>
 </div>
-<script src="conta.js?v=66z"></script>
-<script src="home.js?v=66m"></script>
+<script src="conta.js?v=rev09"></script>
+<script src="home.js?v=rev09"></script>
 </body>
 </html>
