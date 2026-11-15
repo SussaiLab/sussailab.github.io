@@ -1,5 +1,5 @@
-/* SUSSAI – página de login. Aberta pelo SUSSAI numa janelinha.
-   Depois do login, devolve a confirmação do Google para a janela do SUSSAI. */
+/* SussaiLab CLP – página de login. Aberta pelo SussaiLab CLP numa janelinha.
+   Depois do login, devolve a confirmação do Google para a janela do SussaiLab. */
 (function () {
   'use strict';
   var CLIENT_ID = '15890667708-hnm6mo385c0j1ud8om40glo2mf7mor05.apps.googleusercontent.com';
@@ -14,9 +14,9 @@
   }
   function aoEntrar(resp) {
     var d = dadosDoLogin(resp.credential);
-    if (!window.opener) { msg('Login feito como ' + (d.email || '?') + '. Para ativar, abra esta página pelo botão "Entrar com Google" do SUSSAI.', 'erro'); return; }
+    if (!window.opener) { msg('Login feito como ' + (d.email || '?') + '. Para ativar, abra esta página pelo botão "Entrar com Google" do SussaiLab.', 'erro'); return; }
     window.opener.postMessage({ tipo: 'sussai-login', credencial: resp.credential, email: d.email || '', nome: d.name || '' }, '*');
-    msg('✔ Conectado como ' + (d.email || '') + '. Voltando ao SUSSAI CLP…', 'ok');
+    msg('✔ Conectado como ' + (d.email || '') + '. Voltando ao SussaiLab CLP…', 'ok');
     setTimeout(function () { window.close(); }, 1500);
   }
   function iniciar() {
