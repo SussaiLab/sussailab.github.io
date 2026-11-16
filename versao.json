@@ -7,8 +7,8 @@
   "teste": "7dba355463a32bc22809001ee8edd36ded0dbac593cc74c338eb1ac33dfcdc68"
  },
  "aviso": {
-  "pt": "SussaiLab Comandos Elétricos REVISADO (v4.3): física das esteiras e do silo (2 funis, sem transbordo), motores apoiados, 3D revisado e mais nítido, portão do caminhão, mover a vista com a rodinha, textos dos esquemas e 3D com mais definição. Baixe o SussaiLab.zip novo e troque o SussaiLab.exe",
-  "en": "SussaiLab Comandos Elétricos REVISED (v4.3): conveyor and silo physics (2 hoppers, no overflow), supported motors, reviewed and sharper 3D, truck gate, pan the view with the mouse wheel, diagram texts and sharper 3D. Download the new SussaiLab.zip and replace SussaiLab.exe",
-  "es": "SussaiLab Comandos Elétricos REVISADO (v4.3): física de las cintas y del silo (2 tolvas, sin desborde), motores apoyados, 3D revisado y más nítido, portón del camión, mover la vista con la rueda, textos de los esquemas y 3D más nítido. Descargue el nuevo SussaiLab.zip y reemplace SussaiLab.exe"
+  "pt": "SussaiLab Comandos Elétricos REVISADO (v4.3): física das esteiras e do silo (2 funis, sem transbordo), funis fechados, posição do caminhão (laço + fotocélula), motores apoiados e com nome, 3D revisado e mais nítido, portão do caminhão, mover a vista com a rodinha, textos dos esquemas e 3D com mais definição, Guia do Aluno novo (46 páginas, PT/EN/ES). Baixe o SussaiLab.zip novo e troque o SussaiLab.exe",
+  "en": "SussaiLab Comandos Elétricos REVISED (v4.3): conveyor and silo physics (2 hoppers, no overflow, truck position: loop + photocell), supported motors, reviewed and sharper 3D, truck gate, pan the view with the mouse wheel, diagram texts and sharper 3D, new 46-page Student Guide (PT/EN/ES). Download the new SussaiLab.zip and replace SussaiLab.exe",
+  "es": "SussaiLab Comandos Elétricos REVISADO (v4.3): física de las cintas y del silo (2 tolvas, sin desborde, posición del camión: lazo + fotocélula), motores apoyados, 3D revisado y más nítido, portón del camión, mover la vista con la rueda, textos de los esquemas y 3D más nítido, nueva Guía del Alumno (46 páginas, PT/EN/ES). Descargue el nuevo SussaiLab.zip y reemplace SussaiLab.exe"
  }
 }
