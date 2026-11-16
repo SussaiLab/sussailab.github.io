@@ -1,14 +1,14 @@
 {
- "versao": "2026.11.09.8",
+ "versao": "2026.11.15",
  "pacote": true,
  "exe": true,
  "sha": {
-  "completo": "ebe4595a35af3adbf58267ce41b4182bf429882ad8d5e6dfead65af1591f4dbc",
-  "teste": "df55d99c9192f03bd788bdcea410273fcb0c83bf62d117085bf1adc5a42713e4"
+  "completo": "7d0e89432dd692f83d639f4d7fb75752ef0b87a2cfefba07e59a51e3cb1ab291",
+  "teste": "7dba355463a32bc22809001ee8edd36ded0dbac593cc74c338eb1ac33dfcdc68"
  },
  "aviso": {
-  "pt": "Tela de programas se ajusta ao tamanho do monitor · Tela de programas nova (recepção + cartões que ampliam e abrem com um clique) · Janela do CLIC02 simplificada (botões de modo + gráfico de cada modo, como no CLIC02 Edit), endereços I01/Q01 em todas as descrições, licença protegida neste computador e correções gerais",
-  "en": "Programs screen fits any monitor size · New programs screen (welcome + cards that zoom and open with one click) · Simplified CLIC02 window (mode buttons + a chart for each mode, like CLIC02 Edit), I01/Q01 addresses in all descriptions, license protected on this computer and general fixes",
-  "es": "La pantalla de programas se ajusta al monitor · Nueva pantalla de programas (bienvenida + tarjetas que se amplían y abren con un clic) · Ventana del CLIC02 simplificada (botones de modo + gráfico de cada modo, como en CLIC02 Edit), direcciones I01/Q01 en todas las descripciones, licencia protegida en esta computadora y correcciones generales"
+  "pt": "NOVO: SussaiLab Comandos Elétricos GRÁTIS dentro do SussaiLab – CAD e simulador de comandos com 16 máquinas 3D. Baixe o SussaiLab.zip novo e troque o SussaiLab.exe",
+  "en": "NEW: SussaiLab Comandos Elétricos FREE inside SussaiLab – control CAD and simulator with 16 3D machines. Download the new SussaiLab.zip and replace SussaiLab.exe",
+  "es": "NUEVO: SussaiLab Comandos Elétricos GRATIS dentro de SussaiLab – CAD y simulador de mandos con 16 máquinas 3D. Descargue el nuevo SussaiLab.zip y reemplace SussaiLab.exe"
  }
 }
